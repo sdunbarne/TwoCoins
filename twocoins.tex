@@ -1,0 +1,812 @@
+%%% -*-LaTex-*-
+%%% twocoins.tex.orig
+%%% Prettyprinted by texpretty lex version 0.02 [21-May-2001]
+%%% on Thu Sep  6 08:06:18 2018
+%%% for Steve Dunbar (sdunbar@family-desktop)
+
+\documentclass[12pt]{article}
+
+\input{../../../../etc/macros} 
+\input{../../../../etc/mzlatex_macros}
+%% \input{../../../../etc/pdf_macros}
+
+\bibliographystyle{plain}
+
+\begin{document}
+
+\myheader \mytitle
+
+\hr
+
+\sectiontitle{Distinguishing A Biased Coin From a Fair Coin}
+
+\hr
+
+\usefirefox
+
+\hr
+
+% \visual{Study Tip}{../../../../CommonInformation/Lessons/studytip.png}
+% \section*{Study Tip}
+
+% \hr
+
+\visual{Rating}{../../../../CommonInformation/Lessons/rating.png}
+\section*{Rating} %one of
+% Everyone: contains no mathematics.
+% Student: contains scenes of mild algebra or calculus that may require guidance.
+Mathematically Mature:  may contain mathematics beyond calculus with
+proofs.  % Mathematicians Only: prolonged scenes of intense rigor.
+
+\hr
+
+\visual{Section Starter Question}{../../../../CommonInformation/Lessons/question_mark.png}
+\section*{Section Starter Question}
+
+You have with two coins:  one is fair and the other has a biased chance \(
+p > \frac{1}{2} \) of coming up heads.  Unfortunately, you don't know
+which is which.  How can you determine which is the biased coin?  What
+do you need to know?
+
+\hr
+
+\visual{Key Concepts}{../../../../CommonInformation/Lessons/keyconcepts.png}
+\section*{Key Concepts}
+
+\begin{enumerate}
+    \item
+        How to numerically compute the probability of a majority of
+        heads in a sequence of paired coin flips of a biased coin and a
+        fair coin.
+    \item
+        How to numerically compute the probability of statistical
+        evidence of a biased coin in a sequence of paired coin flips of
+        a biased coin and a fair coin.
+    \item
+        Bayesian analysis using likelihood ratios as statistical
+        evidence of a biased coin in a sequence of paired coin flips of
+        a biased coin and a fair coin.
+\end{enumerate}
+
+\hr
+
+\visual{Vocabulary}{../../../../CommonInformation/Lessons/vocabulary.png}
+\section*{Vocabulary}
+\begin{enumerate}
+    \item
+        A sequence of independent Bernoulli trials with probability \(
+        1/2 \) of success on each trial is metaphorically called a \defn
+        {fair} coin.  One for which the probability is not \( 1/2 \) is
+        a \defn{biased} or \defn{unfair} coin.
+    \item
+        Suppose a fair coin \( 1 \) is in the left hand and a biased
+        coin \( 2 \) is in the right hand.  The coin in the left hand
+        comes up heads \( k_L \) times and the coin in the right hand
+        comes up heads \( k_R \) times.  Let \( k = (k_L, k_R) \) and
+        call this scenario \( \theta_L \).  The \defn{likelihood} of
+        this scenario occurring is
+        \[
+            Q(k \given \theta_L) = B(k_L, n, p_1)B(k_R, n, p_2).
+        \]
+    \item
+        If fair coin \( 1 \) is in the right hand and biased coin \( 2 \)
+        is in the left hand then call this scenario \( \theta_R \).  The
+        \defn{likelihood ratio} is
+        \[
+            \frac{Q(k \given \theta_L)}{Q(k \given \theta_R)}.
+        \]
+\end{enumerate}
+
+\hr
+
+\visual{Mathematical Ideas}{../../../../CommonInformation/Lessons/mathematicalideas.png}
+\section*{Mathematical Ideas}
+
+\subsection*{A Simple Probability Problem}
+
+This problem serves as a warmup for the more detailed investigations
+below.
+
+You have two coins.  One is fair with \( \Prob{H} = \frac{1}{2} \).  The
+other coin is biased with \( \Prob{H} = \frac{2}{3} \).  First you toss
+one of the coins once, resulting in heads.  Then you toss the other coin
+three times, resulting in two heads.  Which coin is more likely to be
+the biased coin, the first or the second?
+
+\subsubsection*{Joint Probability Solution}
+
+Assuming tossing the biased coin once and tossing the fair coin three
+times, the probability of observing the outcome is
+\[
+    \frac{2}{3} \cdot \binom{3}{2} \left( \frac{1}{2} \right)^2 \left(
+    \frac{1}{2} \right)^1 = \frac{2}{8}.
+\]
+
+On the other hand, assuming tossing the fair coin once and tossing the
+biased coin three times, the probability of observing the given outcome
+is
+\[
+    \frac{1}{2} \cdot \binom{3}{2} \left( \frac{2}{3} \right)^2 \left(
+    \frac{1}{3} \right)^1 = \frac{2}{9}.
+\]
+
+This means it was more likely the biased coin was tossed once
+while the fair coin was tossed three times.
+
+\subsubsection*{Using Bayes Theorem}
+
+Take a uniform prior, that is, assume that the first coin is equally
+likely to be either of the two coins.  Let \( K = (k_1, k_2) \) denote
+the observation, and \( B \) the event that the first coin is biased.
+Then
+\[
+    \Prob{B} = \Prob{B^C} = \frac{1}{2}.
+\]
+
+The conditional probabilities are
+\[
+    \Prob{K \given B} = \frac{2}{3} \cdot \binom{3}{2} \left( \frac{1}{2}
+    \right)^2 \left( \frac{1}{2} \right)^1 = \frac{2}{8}
+\] and
+\[
+    \Prob{K \given B^C} = \frac{1}{2} \cdot \binom{3}{2} \left( \frac{2}
+    {3} \right)^2 \left( \frac{1}{3} \right)^1 = \frac{2}{9}.
+\]
+
+From Bayes Theorem,
+\begin{align*}
+    \Prob{B \given K} &= \frac{\Prob{K \given B} \cdot \Prob{B}}{\Prob{K
+    \given B} \cdot \Prob{B} + \Prob{K \given B^C} \cdot \Prob{B^C}} \\
+    &= \frac{2/8}{2/8 + 2/9} = \frac{9}{17} > \frac{1}{2}.
+\end{align*}
+
+\subsubsection*{Using Likelihood Ratios}
+
+Take even prior odds to be even, that is, assume that the first coin is
+equally likely to be either of the two coins.  Let \( K = (k_1, k_2) \)
+be the observed outcomes.  The likelihood ratio is
+
+\begin{align*}
+    L(K) &= \frac{\Prob{K \given B}}{\Prob{K \given B^C}} \\
+    &= \frac{\frac{2}{3} \binom{3}{2} \left( \frac{1}{2} \right)^3}{\frac{1}{2} \cdot
+    \binom{3}{2} \left( \frac{2}{3} \right)^2 \left(\frac{1}{3} \right)^1} \\
+    &= \frac{6/24}{12/54} = \frac{9}{8}.
+\end{align*}
+
+Then the odds in favor of the first coin being biased and the second
+coin being fair are \( 9 :  8 \), so the probability is \( \frac{9}{8+9}
+= \frac{9}{17} \).
+
+\subsection*{A Larger Problem}
+
+The following problem appeared in the FiveThirtyEight.com weekly Riddler
+puzzle column on September 29, 2017:
+
+\begin{quotation}
+    On the table in front of you are two coins.  They look and feel
+    identical, but you know one of them has been doctored.  The fair
+    coin comes up heads half the time while the doctored coin comes up
+    heads \( 60 \) percent of the time.  How many flips -- you must
+    flip both coins at once, one with each hand -- would you need to
+    give yourself a \( 95 \) percent chance of correctly identifying the
+    doctored coin?
+
+    Extra credit:  What if, instead of \( 60 \) percent, the doctored
+    coin came up heads some percent \( p \) of the time?  How does that
+    affect the speed with which you can correctly detect it?
+\end{quotation}
+
+This problem appeared in a paper ``What's Past is \emph{Not} Prologue''
+by James White, Jeff Rosenbluth, and Victor Haghani.  In turn, a problem
+posed in a paper ``Good and bad properties of the Kelly criterion'' by
+MacLean, Thorp and Ziemba inspired the problem by White, Rosenbluth, and
+Haghani.
+
+Solving this problem requires some interpretation and computation.
+
+\subsection*{Probability of a Majority of Heads}
+
+% Potentially change notation for Q to reflect R notation
+% Check the covariance assertion
+
+In any fixed number of simultaneous flips, there is always a chance that
+the fair coin will have more heads than the biased coin.  But the Weak
+Law of Large Numbers says that the probability that the biased coin will
+have a majority of heads increases to \( 1 \) as the number of flips
+increases.  One way to determine which is the biased coin is to choose
+the coin which has a majority of heads.  The authors White, Rosenbluth,
+and Haghani want to calculate how many paired flips of \( 2 \) coins,
+one biased and one fair, we must observe in order to be \( 95\% \)
+confident that the coin with more heads is the biased coin.
+
+Assuming independence, since each coin has a binomial distribution the
+joint probability mass distribution after \( n \) flips is the product
+of the individual binomial probability mass distributions.%
+\index{binomial distribution}
+Denote by \( Q(n; j,k) \) the probability of \( j \) heads for the fair
+coin and \( k \) heads for the biased in \( n \) flips.  Use \( p \) for
+the probability of heads of the biased coin and \( \frac{1}{2} \) for
+the probability of heads for the fair coin.  Then
+\[
+    Q( n; j, k) = \binom{n}{j} \left( \frac{1}{2} \right)^j \left( \frac
+    {1}{2} \right)^{n-j} \cdot \binom{n}{k} p^k (1-p)^{n-k}.
+\]%
+\index{bivariate binomial distribution}
+
+Then summing over values where \( j < k \) gives the probability that
+the biased coin has more heads than the fair coin in \( n \) flips
+\[
+    \Prob{j<k} = \frac{1}{2^{n}} \sum\limits_{k \le n} \sum\limits_{j <
+    k } \binom{n}{j} \binom{n}{k} p^k (1-p)^{n-k}.
+\] This sum has no closed formula evaluation so calculation is
+necessary.  First create two vectors of length \( n+1 \) with the
+binomial distribution on \( 0 \) to \( n \) with probability \( \frac{1}
+{2} \) for the fair coin and with probability \( p \) for the biased
+coin.  Then using the outer product of these two vectors create the
+bivariate binomial distribution for the two coins.  This will be an \( (n+1)
+\times (n+1) \) matrix.  The element in row \( i \) and column \( j \)
+is the product of the binomial probability of \( i-1 \) heads for the
+fair coin and the binomial probability of \( j-1 \) heads for the biased
+coin.  The sum is over column indices strictly greater than the row
+indices.  To create the sum, set the lower triangular part of the matrix
+and the diagonal of the matrix to \( 0 \) and use the sum command to sum
+all entries of the matrix.  This seems to be efficient, even for values
+of \( n \) up to \( 200 \).  To find the minimal value of \( n \) for
+which this probability is greater than \( 0.95 \) use binary search in \(
+n \) over a reasonable interval.
+
+It might seem possible to use a bivariate normal approximation of the
+bivariate binomial distribution to calculate the probability.  Although
+approximation of the bivariate binomial distribution with a bivariate
+normal distribution is possible, the double integration of the bivariate
+normal with a non-zero covariance would be over a region of the form \(
+y > x-\epsilon \).  The R language has no direct way to calculate the
+integral over a region of this form, so it is actually easier to
+calculate with the bivariate binomial distribution.
+
+The result is that it takes \( 143 \) flips of the two coins for the
+probability to be greater than \( 0.95 \) for the \( 0.6 \) biased coin
+to have more heads than the fair coin.
+
+The same analysis for various probabilities of heads \( p \) for the
+biased coin and for values \( 0.95 \), \( 0.9 \) and \( 0.75 \) of
+certainty is in Figure~%
+\ref{fig:twocoins:majorityBinarySearch}.  The number of flips required
+decreases as the bias \( p \) increases, as expected.  The number of
+flips required also decreases as the certainty decreases.
+
+\begin{figure}[htbp]
+    \centerline{\includegraphics[]{majorityBinarySearch.pdf}}
+    \caption{The number of flips $ N $ required to get a majority of
+    heads with certainty $ 0.95 $ (black), $ 0.9 $ (red) and $ 0.75$
+    (blue).}%
+    \label{fig:twocoins:majorityBinarySearch}
+\end{figure}
+
+\subsection*{Using the Central Limit Theorem}
+
+Assume that the biased coin is in the left hand.%
+\index{biased coin}
+Let \( L_j \) be the result of left-hand coin flip \( j \), knowing it
+is biased so \( L_j = \text{Head} = 1 \) with probability \( 0.6 \), \(
+L_j = \text{Tail} = 0 \) with probability \( 0.4 \).  Let \( R_j \) be
+the result of right-hand coin flip \( j \), knowing it is fair so \( R_j
+= \text{Head} = 1 \) with probability \( 0.5 \), \( R_j = \text{Tail} =
+0 \) with probability \( 0.5 \).  Let \( X_j = L_j - R_j \).  This is a
+trinomial random variable with \( X_j = -1 \) with probability \( 1/5 =
+0.2 \), \( X_j = 0 \) with probability \( 1/2 = 0.5 \), \( X_j = 1 \)
+with probability \( 3/10 = 0.3 \).
+
+Consider the statistics of \( X_j \),
+\begin{align*}
+    \E{X_j} &= (-1)\cdot(0.2) + 0 \cdot (0.5) + (+1)\cdot(0.3) = 0.1, \\
+    \Var{X_j} &= (-1)^2\cdot(0.2)+(0)^2\cdot(0.5)+(+1)^2\cdot(0.3)-(0.1)^2\\
+    & =0.49, \\
+    \sigma[X_j] &= 0.7.  \\
+\end{align*}
+
+Let \( S_n = \frac{1}{n} \sum\limits_{j=1}^n X_j \) be the sample mean.
+The distribution of \( S_n \) is on \( -1 \) to \( 1 \) by increments of
+\( 1/n \) for a total of \( 2n+1 \) points with
+\begin{align*}
+    \E{S_n} &= 0.1, \\
+    \Var{S_n} &= 0.49/n, \text{ by independence, } \\
+    \sigma[S_n] &= 0.7/\sqrt{n}.
+\end{align*}
+Thus the distribution of \( S_n \) clusters around \( 1/10 \) with
+standard deviation \( 7/(10 \sqrt{n}) \).%
+\index{sample mean|distribution}
+If the biased coin is in the right hand, the distribution of \( S_n \)
+clusters around \( -1/10 \) with standard deviation \( 7/(10 \sqrt{n}) \).%
+The goal is find a number of flips such that with high probability the
+sample mean \( S_n \) is closer to the theoretical mean \( 0.1 \) (when
+the biased coin is in the left hand) than the value \( -0.1 \) (the
+theoretical mean coming from the situation with the biased coin in the
+right hand). Take ``the sample mean closer to \( 0.1 \) than \( -0.1 \)''
+to mean that \( S_n \) is closer to \( 0.1 \) than the distance to the
+midpoint \( 0 \) between the two means.  Precisely, the goal is to find \(
+n \) so that \( \Prob{S_n - 0.1 > -0.1} \ge 0.95 \).  This is the same
+event as \( \Prob{S_n > 0} = \Prob{L_n-R_n > 0} = \Prob{L_n > R_n} \)
+which is the same criterion as having the majority of heads above.
+
+Expressing the precise distribution of \( S_n \) analytically is
+difficult.  So instead, use a numerical calculation of the distribution.
+To numerically calculate the distribution of the sample mean \( S_{n} \),
+use the R package \texttt{distr} and specifically the function \texttt{convpow}
+that takes the \( n \)-fold convolution power of a distribution to
+create the distribution of the \( n \)-fold sum of a random variable.%
+\index{convolution power}
+Note that mathematically the support of the distribution of, for
+instance \( S_{100} \), would be from \( -1 \) to \( 1 \), with \( 201 \)
+points.  However, the actual calculated distribution support of, for
+instance, \( S_{100} \), is \( 111 \) points from \( -46 \) to \( 64 \).
+The reason is that \texttt{convpow} ignores points with probability less
+than \( 10^{-16} \) and so these points are not included in the domain.
+So use \texttt{match(0, (support(D100)))} to find the index of \( 0 \).
+This turns out to be index \( 47 \).  So summing the distribution over
+indices from \( 47+1 \) to \( 111 \) gives the probability that the
+random variable \( S_{n} > 0 \). Searching for a value of \( n \) large
+enough that the probability exceeds \( 0.95 \) gives the required number
+of flips. From some experimentation, the numerical support of the
+distribution is positive for \( n \ge 150 \), that is, \( \Prob{S_{n}
+\ge 0} = 1 \) for \( n \ge 150 \).  That means that the numerical search
+should start from a high of \( 150 \).
+
+Using this algorithm, the necessary number of flips to distinguish a
+biased coin with a probability of heads \( 0.6 \) from a fair coin with
+a certainty level of \( 0.95 \) is \( 143 \).  The same analysis for
+various probabilities of heads \( p \) for the biased coin and for
+values \( 0.95 \), \( 0.9 \) and \( 0.75 \) of certainty is in Figure~%
+\ref{fig:twocoins:statisticalBinarySearch}.  The number of flips
+required decreases as the bias increases as expected.  The number of
+flips required also decreases to \( 5 \) for certainty \( 0.95 \), \( 4 \)
+for certainty \( 0.9 \) and \( 3 \) for certainty \( 0.75 \).
+
+\begin{figure}[htbp]
+    \centerline{\includegraphics[]{statisticalBinarySearch.pdf}}
+    \caption{The number of flips $ N $ required to statistically
+    distinguish a coin with probability $ p $ from a fair coin with $
+    0.95 $ (black), $ 0.9 $ (red) and $ 0.75 $ (blue).}%
+    \label{fig:twocoins:statisticalBinarySearch}
+\end{figure}
+
+\subsection*{Connections between the Two Calculations}
+
+\begin{figure}[htbp]
+    % \centerline{\includegraphics[]{bivariate_binomial.pdf}}
+\begin{asy}
+settings.outformat = "pdf";
+
+import graph;
+
+size(5inches);
+
+real myfontsize = 12;
+real mylineskip = 1.2*myfontsize;
+pen mypen = fontsize(myfontsize, mylineskip);
+defaultpen(mypen);
+
+int N  = 10;
+
+filldraw( (1,10)--(10,10)--(10,1)--cycle, lightgrey);
+
+for (int i=0; i <= N; ++i) {
+  for (int j=0; j <= N; ++j) {
+    dot((i,j));
+  }
+}
+
+xaxis(L=Label("biased heads", align=(0,1)), xmin=0, xmax=10, axis=YEquals(N+1), ticks=RightTicks(n=1));
+yaxis(L="fair heads", ymin=0, ymax=10, axis=XEquals(-1), ticks=RightTicks(new  string(real x) {return string(N-x);}, n=1));
+
+for(int i=0; i<=N; ++i) {
+  draw((0,i)--(i+1, -1), red, Arrow);
+  label(string(i-10), (i+1,-1), align = SE);
+}
+
+for(int i=1; i<=N; ++i) {
+  draw((i,10)--(11, i-1 ), red, Arrow);
+  label(string(i), (11,i-1), align = SE);
+}
+\end{asy}
+
+    \caption[]{The support of the bivariate binomial and the calculation
+    of the multinomial distribution for $ n = 10 $.}%
+    \label{fig:twocoins:bivariate}
+\end{figure}
+
+The calculation of the probabilities uses fundamentally the same
+information, as the diagram in Figure~%
+\ref{fig:twocoins:bivariate} for the case \( n = 10 \) illustrates.  The
+\( 11 \times 11 \) array of dots represents the support of the \emph{bivariate
+binomial distribution} as a matrix, with rows from \( 0 \) to \( 11 \)
+for the number of heads from the fair coin and columns \( 0 \) to \( 11 \)
+for number of heads for the biased coin.
+
+The probability that the majority of flips is from the biased coin is
+the sum of the probabilities in the strict upper triangle of the support
+of the bivariate distribution.  The shaded portion of Figure~%
+\ref{fig:twocoins:bivariate} shows this domain.
+
+The \emph{multinomial probability distribution} on \( -10 \) to \( 10 \)
+of the sum \( \sum\limits_{j=0}^{10} (L_j-R_j) \) is the sum of the
+probabilities along diagonals of the bivariate binomial distribution as
+indicated by the red arrows.  In the case the biased coin has \( p=0.6 \)
+so the mean of \( L_n - R_n = 0.1 \), the probability of the event
+\begin{align*}
+    [S_n > 0] &= \left[\frac{1}{n} \sum\limits_{j=1}^n (L_j-R_j) > 0
+    \right] \\
+    &= \left[\sum\limits_{j=1}^n (L_j-R_j) > 0 \right] \\
+    &= \left[\sum\limits_{j=1}^n L_j > \sum\limits_{j=1}^n R_j \right]
+\end{align*}
+is the sum of the probabilities in the strict upper triangle.  This is
+the same criterion as for the majority of heads above.  For \( p = 0.6 \)
+the search using the sample mean again requires \( 143 \) pair flips to
+distinguish the coins with certainty \( 0.95 \).
+
+The framing of the application motivates the choice of criterion.  The
+original problem posed in FiveThirtyEight.com comes from a white paper
+by James White, Jeff Rosenbluth, and Victor Haghani from Elm Partners
+Investing.  The paper ``Good and bad properties of the Kelly criterion''
+by McLean, Thorp and Ziemba motivated their example.  The question is a
+simplified and idealized version of an investment question about how to
+identify a higher performing investment, modeled by a biased coin, from
+a lower performing investment with just an even chance at making a
+profit, modeled by a fair coin.  In that case, the \( 95\% \) certainty
+of a majority of gains is a reasonable choice of criterion.  If the
+question is merely to identify the biased coin, then it makes sense to
+use the Central Limit Theorem to distinguish the mean given that the
+biased coin is in the left hand from the mean given that the biased coin
+is in the right hand.
+
+\subsection*{Bayesian Solution}
+
+The coin flips are independent.  So if a coin comes up heads with
+probability \( p \) and we flip it \( n \) times, the binomial
+distribution \( B(k, n, p) = \binom{n}{k} p^k(1-p)^{n-k} \) gives the
+probability that it comes up heads exactly \( k \) times. Number the
+coins \( 1 \) and \( 2 \) probabilities of coming up heads \( p_{1} \)
+and \( p_{2} \) respectively.  Flip each coin \( n \) times and record
+how many times each coin come up heads, but we don't know which coin is
+which.  Say the coins come up heads \( k_{L} \) and \( k_{R} \) times
+for the left and right coin respectively.  Call the vector of observed
+data \( k = (k_L, k_R) \).
+
+Exactly two possible scenarios occur:
+\begin{description}
+    \item[Fair on Left]
+        Fair coin \( 1 \) was in the left hand and biased coin \( 2 \)
+        was in the right hand and the observed outcome is \( k = (k_L, k_R)
+        \).  Call this scenario \( \theta_L \).  The likelihood of this
+        scenario occurring is
+        \[
+            Q(k \given \theta_L) = B(k_L, n, p_1)B(k_R, n, p_2).
+        \]
+    \item[Fair on Right]
+        Fair coin \( 1 \) was in the right hand and biased coin \( 2 \)
+        was in the left hand and the observed outcome is \( k = (k_L, k_R)
+        \).  Call this scenario \( \theta_R \).  The likelihood of this
+        scenario occurring is
+        \[
+            Q(k \given \theta_R) = B(k_L, n, p_2)B(k_R, n, p_1).
+        \]
+\end{description}
+
+Compute the posterior probability by using Bayes’ rule:
+\[
+    Q( \theta_L | k ) = \frac{Q(k \given \theta_L) \cdot \Prob{\theta_L}}
+    {Q(k \given \theta_L ) \cdot \Prob{\theta_L} + Q(k \given \theta_R )
+    \cdot \Prob{\theta_R}}
+\] and similarly for \( Q( \theta_R | k ) \).%
+\index{Bayes' rule}
+Assume that scenarios \( \theta_L \) and \( \theta_R \) have the same
+prior probability so \( \Prob{\theta_L} = \Prob{\theta_R} = 1/2 \).
+Therefore, the Bayesian condition for confidence simplifies to
+\[
+    \frac{Q(k \given \theta_L)}{Q(k \given \theta_L) + Q(k \given \theta_R)
+    } > 1- \alpha \text{ or } \frac{Q(k \given \theta_R)}{Q(k \given
+    \theta_L ) + Q(k \given \theta_R) } > 1- \alpha.
+\]
+
+To be confident with level \( \alpha \) about one of the scenarios then
+the posterior probability must be greater than \( 1 - \alpha \).
+\begin{description}
+    \item[Fair on Left]
+        If \( Q(\theta_L \given k)>1 -\alpha \), then we are confident
+        in Scenario Fair on Left.
+    \item[Fair on Right]
+        If \( Q(\theta_R \given k)>1 - \alpha \), then we are confident
+        in Scenario Fair on Right.
+\end{description}
+By definition, \( Q(\theta_L \given k ) + Q(\theta_R \given k ) = 1 \)
+for all \( k \).  So the two cases above can't simultaneously be true
+when \( \alpha < 1/2 \).  Rearranging these inequalities, we have
+\[
+    \frac{Q(k \given \theta_L)}{Q(k \given \theta_R)} > \frac{1-\alpha}{\alpha}
+    \text{ or } \frac{Q(k \given \theta_R)}{Q(k \given \theta_L)} >
+    \frac{1-\alpha}{\alpha}.
+\]%
+\index{likelihood ratio}
+
+The implication is that we can stop flipping coins once the difference
+between log-likelihoods grows sufficiently large.  The smaller is \(
+\alpha \), the larger the difference in log-likelihoods must be before
+we can declare that we are confident. Simplify the expression by
+substituting the definition for the likelihoods \( Q(k \given \theta_L) \)
+and \( Q(k \given \theta_R) \) in terms of the binomial probabilities
+becoming
+\[
+    \frac{Q(k \given \theta_L)}{Q(k \given \theta_R)} = \left(\frac{p_1}
+    {p_2} \right)^{k_L - k_R} \cdot \left(\frac{1-p_2}{1-p_1} \right)^{k_L
+    - k_R}.
+\] Take logarithms of both sides and combine the expressions into a
+single inequality involving the absolute difference of log-likelihoods
+\[
+    \abs{\log Q(k \given \theta_L) - \log Q(k \given \theta_R)} > \log
+    \left( \frac{1}{\alpha} - 1 \right).
+\]%
+\index{log-likelihood}
+The implication is that we can stop flipping coins once the difference
+between log-likelihoods grows sufficiently large.  The smaller is \(
+\alpha \), the larger the difference in log-likelihoods must be before
+we can declare that we are confident. After simplification, this becomes
+\[
+    \abs{k_L - k_R} \cdot \abs{ \log\left( \frac{1}{p_1} - 1 \right) -
+    \log\left( \frac{1}{p_2} - 1 \right) } > \log \left( \frac{1}{\alpha}
+    - 1 \right).
+\]
+
+The number of heads \( k_L \) and \( k_R \) in the left and right hands
+are random variables.  In one hand the number of heads from the coin
+with \( p_1 \) will have the binomial probability distribution with mean
+\( np_1 \) and standard deviation \( \sqrt{np_1(1-p_1)} \). In the other
+hand the number of heads from the coin with \( p_1 \) will have the
+binomial probability distribution with mean \( np_2 \) and standard
+deviation \( \sqrt{np_2(1-p_2)} \).  Normal distributions with
+corresponding means and standard deviations can approximate each
+binomial distribution.
+
+As a first approximation, substitute the empirical probabilities \( \hat
+{p}_1 = k_L/n \) and \( \hat{p}_2 = k_R/n \) obtained from the
+distribution means.  Rearrange to isolate \( n \) to obtain
+\[
+    n > \frac{1}{\abs{\hat{p}_1 - \hat{p}_2}} \cdot \frac{\log \left(\frac
+    {1}{\alpha} - 1 \right)}{\abs{ \log\left( \frac{1}{p_1} - 1 \right)
+    - \log\left( \frac{1}{p_2} - 1 \right) }}.
+\] This expression is a lower bound on the number of samples required,
+in terms of the confidence \( \alpha \), the known probabilities \( p_1 \)
+and \( p_2 \) and the empirical probabilities \( \hat{p}_1 \) and \(
+\hat{p}_2 \).  Note that if \( p_1 - p_2 \to 0 \), then \( n \to \infty \)
+which is expected.  Taking \( \hat{p}_1 = p_1 = 0.5 \), \( \hat{p}_2 = p_2
+= 0.6 \) and \( \alpha = 0.05 \), then \( n = 72.619 \). More generally,
+Figure~%
+\ref{fig:twocoins:flips} shows a plot of the number of flips required as
+a function of \( p_2 \) for fixed \( p_1 = 0.5 \) and fixed \( \alpha =
+0.05 \), so in percentages, \( 95\% \) confidence.
+
+\begin{figure}
+    \centering
+\begin{asy}
+    import graph;
+
+size(5inches, IgnoreAspect);
+
+real myfontsize = 12;
+real mylineskip = 1.2*myfontsize;
+pen mypen = fontsize(myfontsize, mylineskip);
+defaultpen(mypen);
+
+real p1 = 0.5;
+real alpha = 0.05;
+
+real flips(real p2) {
+  real topa = log( 1/alpha - 1);
+  real diff = p2 - p1;
+  real botp1 = log( 1/p1 - 1);
+  real botp2 = log( 1/p2 - 1);
+  return (1/abs(diff))*(topa/(abs(botp1 - botp2)));
+}
+
+
+real log10up(real x) {return log10(x);}
+real pow10up(real x) {return pow10(x);}
+
+scaleT yscale=scaleT(log10up,pow10up,logarithmic=true);
+scale(Linear,yscale);
+
+draw(graph(flips,0.51,0.98));
+draw(graph(flips,0.01,0.49));
+
+yaxis("Flips",ymin=1,ymax=flips(0.51),RightTicks(Label(Fill(white))),EndArrow);
+xaxis("$p2$", xmin=0.0, xmax=1.0, RightTicks);
+xequals(0.5, red+dashed);
+\end{asy}
+    \caption{Number of flips required as a function of $ p_2 $ for
+    fixed $ p_1 = 0.5 $ and $ \alpha = 0.05 $.}%
+    \label{fig:twocoins:flips}
+\end{figure}
+
+However, this is only a lower bound on the real number of flips required
+to find the biased coin since \( k_L \) and \( k_R \) can be closer than
+what was used above.  In fact, in the scenario Fair on Left can have \(
+k_L \) in the range \( [0, np_1+z_{\beta}\sqrt{np_1(1-p_1)}] \) and \( k_R
+\) in the range \( [ np_2 - z_{\beta}\sqrt{np_2(1-p_2)}, n] \).  The
+probability of each of these events is determined by quantiles \( z_{\beta}
+\) of the binomial distribution, or approximately by the normal
+distribution. Since \( \sqrt{np_2(1-p_2)} < \sqrt{n \cdot \frac{1}{2}
+\cdot \frac{1}{2}} = \frac{1}{2}\sqrt{n} \)
+\begin{align*}
+    \abs{k_L - k_R} &> (np_2 - z_{\beta}\sqrt{np_2(1-p_2)}) - (np_1+z_{\beta}\sqrt
+    {np_1(1-p_1)}) \\
+    &= n(p_2-p_1) - z_{\beta}(\sqrt{p_2(1-p_2)} + \sqrt{p_1(1-p_1)})
+    \sqrt{n} \\
+    &> n(p_2-p_1) - z_{\beta} \sqrt{n}
+\end{align*}
+with probability determined by the quantile \( z_{\beta} \).  Note that
+\( p_2-p_1 >0 \), so \( n(p_2-p_1) - z_{\beta} \sqrt{n} \)
+is positive for sufficiently large \( n \).
+The number of flips then required to determine which is the biased coin
+is then determined by
+\[
+    n(p_2-p_1) - z_{\beta} \sqrt{n} > 
+     \frac{\log \left(\frac{1}{\alpha} - 1 \right)}{\abs{ \log\left
+    ( \frac{1}{p_1} - 1 \right) - \log\left( \frac{1}{p_2} - 1 \right) }}.
+\] Choosing a quantile \( z_{\beta} \), substituting for \( p_1 \), \( p_2
+\) and \( \alpha \), and then solving for \( n \) gives a lower bound
+for the number of flips required for distinguishing the fair coin from
+the biased coin.
+
+For example, choosing \( z_{\beta} = 1.96 \) gives the approximate
+probability \( \beta = 0.975 \) that \( k_L \) is in the range \( [0, np_1+z_
+{\beta}\sqrt{np_1(1-p_1)}] \) and independently that \( k_R \) is in the
+range \( [ np_2 - z_{\beta}\sqrt{np_2(1-p_2)}, n] \).  Then the
+probability of both events is  \( (0.975)^2 \approx 0.95 \).
+Using \( p_1 = 0.5 \), \( p_2 = 0.6 \) and \( \alpha = 0.05 \), the
+inequality is approximately
+\[
+    0.1 n - 1.96 \sqrt{n} > 7.26.
+\] Solving for \( n \) gives \( n \ 519.20 \).  As another example set \(
+z_{\beta} = 0.559 \) with an approximate probability of \( 0.712 \) of \( k_L \) in
+the range \( [0, np_1+z_{\beta}\sqrt{np_1(1-p_1)}] \) and independently
+that \( k_R \) in the range \( [ np_2 - z_{\beta}\sqrt{np_2(1-p_2)}, n] \)
+and joint probability of \( 0.507 \).  Then solving \( 0.1 n - 0.559
+\sqrt{n} > 7.26 \) gives \( n = 138.35 \).  As a final example, choosing \(
+z_{\beta} = 0 \) gives a probability of \( 0.5 \) of \( k_L \) in the
+range \( [0, np_1] \) and independently with probability approximately \(
+0.5 \) that \( k_R \) in the range \( [ np_2, n] \) and joint
+probability of \( 0.25 \).  This is equivalent to the original
+calculation giving the lower bound of \( n=72.6 \).
+
+The extended Bayesian analysis introduces another parameter \( z_{\beta}
+\).  Using two parameters \( z_{\beta_1} \) and \( z_{\beta_2} \), as
+long as \( np_1+z_{\beta_1}\sqrt{np_1(1-p_1)} < np_2-z_{\beta_2}\sqrt{np_2
+(1-p_2)} \) for reasonable values of \( n \), might be better. Now some
+experimentation, including binary search, is necessary to choose a value
+of \( n \ge 73 \) required to determine the biased coin with certainty \(
+0.95 \).  The scripts below show the results of that experimentation and
+compare it to the other determination methods based on the majority and
+the Central Limit Theorem.  For example, with \( p_1 = 0.5 \) in the
+left hand, and \( p_2 = 0.6 \) in the right hand it takes \( 189 \)
+flips to identify the fair coin in the left hand with \( 95\% \)
+certainty.  A close look at the results show why the log-likelihood
+Bayesian criterion requires more flips for the same certainty.  The
+short answer is that the log-likelihood is a stricter requirement than
+the majority requirement in the other two approaches.  In one trial with
+\( 200 \) flips, the fair coin in the left hand came with \( 108 \)
+heads while the biased coin in the right hand came up with \( 110 \)
+heads.  The majority of heads was in the right hand, but the absolute
+difference of the log-likelihoods is \( 0.8109302 \), not greater than \(
+\log(1/\alpha-1) = 2.944439 \).  Both heads totals are well within the
+two-standard deviation range around the respective expected values of \(
+100 \) heads and \( 120 \) heads respectively.
+
+An R script testing all three methods against placing the fair and
+biased coins in the left and right randomly is in the scripts section.
+In summary, even with more flips, the Likelihood method is slightly less
+effective than the two majority methods.  It is also a more complicated
+procedure.
+
+\subsection*{Sources}
+
+The definition of biased coin is from Wikipedia.
+
+The simple probability problem is adapted from \link{https://www.cut-the-knot.org/Probability/TwoCoins.shtml}
+{Bogolmony, Cut-the-Knot, Two Coins, One Fair, One Biased}.  The same
+problem appears in \link{http://www.flyingcoloursmaths.co.uk/two-coins-one-fair-one-biased}
+{FlyingColoursMaths Two Coins, One Fair, One Biased}.
+
+The problem of how many tosses to find the biased coin appeared in the
+FiveThirtyEight.com weekly Riddler puzzle column on September 29, 2017.
+This first subsection with the majority solution is adapted from a white
+paper ``What's Past is \emph{Not} Prologue'' by James White, Jeff
+Rosenbluth, and Victor Haghani from Elm Partners Investing.  In turn,
+their example is motivated by a paper ``Good and bad properties of the
+Kelly criterion'' by McLean, Thorp and Ziemba.  The second subsection
+with the statistical solution is original.
+
+The Bayesian analysis is adapted and extended from \\
+\link{https://laurentlessard.com/bookproofs/finding-the-doctored-coin}{Lessard,Finding the baised coin}.
+
+\nocite{white17}
+\nocite{maclean10}
+
+\hr
+
+\visual{Algorithms, Scripts, Simulations}{../../../../CommonInformation/Lessons/computer.png}
+\section*{Algorithms, Scripts, Simulations}
+
+\subsection*{Algorithm}
+
+%% \input{twocoins_algorithms}
+\subsection*{Scripts}
+
+\input{twocoins_scripts}
+
+\hr
+
+\visual{Problems to Work}{../../../../CommonInformation/Lessons/solveproblems.png}
+\section*{Problems to Work for Understanding}
+\begin{enumerate}
+    \item
+        You have two coins.  One is fair with \( \Prob{H} = \frac{1}{2} \).
+        The other coin is biased with \( \Prob{H} = p > \frac{1}{2} \).
+        First you toss one of the coins once, resulting in heads.  Then
+        you toss the other coin three times, resulting in two heads.
+        What is the least value of \( p \) that will allow you to decide
+        which is the biased coin based on this information?
+
+
+        %%  Interestingly, the probability of two heads in three tosses from a
+        %%  fair coin and  one head in one toss from a biased coin with $p >
+        %%  1/2$ is always greater, for any $p$, than
+        %%  the probability of two heads in three tosses from a
+        %%  biased coin and  one head in one toss from a fair coin
+
+    \item
+        Show that the log-likelihood expression with the binomial
+        probabilities simplifies to
+        \[
+            \abs{k_L - k_R} \cdot \abs{ \log\left( \frac{1}{p_1} - 1
+            \right) - \log\left( \frac{1}{p_2} - 1 \right) } > \log
+            \left( \frac{1}{\alpha} - 1 \right).
+        \]
+\end{enumerate}
+
+%% \link{ _soln.xml}{Solutions to Problems}
+
+\hr
+
+\visual{Books}{../../../../CommonInformation/Lessons/books.png}
+\section*{Reading Suggestion:}
+
+\bibliography{../../../../CommonInformation/bibliography}
+
+%   \begin{enumerate}
+%     \item
+%     \item
+%     \item
+%   \end{enumerate}
+
+\hr
+
+\visual{Links}{../../../../CommonInformation/Lessons/chainlink.png}
+\section*{Outside Readings and Links:}
+\begin{enumerate}
+    \item
+    \item
+    \item
+    \item
+\end{enumerate}
+
+\hr
+
+\mydisclaim \myfooter
+
+Last modified:  \flastmod
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

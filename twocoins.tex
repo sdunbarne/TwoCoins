@@ -706,6 +706,73 @@ In summary, even with more flips, the Likelihood method is slightly less
 effective than the two majority methods.  It is also a more complicated
 procedure.
 
+\subsection*{Analysis of All Possible Algorithms}
+
+The Weak
+Law of Large Numbers says that the probability that the biased coin will
+have a majority of heads increases to \( 1 \) as the number of flips
+increases.  In principle then, using an unlimited number of tosses will
+determine the biased coin.  But efficiency asks for a sufficient
+number of tosses to determine the biased coin with a satisfactory
+confidence.  The discussion above gives several algorithms each with
+some number of tosses, often a large number, required to determine the
+biased coin with some confidence.  But the question remains, are
+these the best algorithms?  That is,  among all possible algorithms is
+there a minimum number of tosses necessary to determine the biased
+coin with a certain confidence?  The goal of this subsection is to get
+a theoretical lower bound on the necessary number of tosses.
+
+The model is as follows \( X_1, X_2, X_3, \ldots \) is a sequence of
+i.i.d. Bernoulli random variables with \( p = 1/2 \) and \( Y_1, Y_2,
+Y_3, \ldots \) is an independent sequence of
+i.i.d. Bernoulli random variables with \( p = 1/2 + \epsilon\).  For
+reasons of simplicity which appear later, assume $0 < \epsilon <
+1/4$. Let $0 < \alpha < 1/2$ be the error tolerance or equivalently
+$1/2 < 1- \alpha < 1$ is the confidence.  Let $\mathcal{A}$ be an
+algorithm, that is, a function which takes a binary string $Z = (Z_1, Z_2,
+  Z_3, \ldots, Z_n)$ as input and outputs $0$ if the algorithm
+  determines $Z_i \sim X_i$ and outputs $1$ if the algorithm
+  determines $Z_i \sim Y_i$. Let $\bbP^m$ be the distribution of $X_1, X_2,
+  X_3, \ldots, X_m$ and $\bbQ^{m}$ be the distribution of $Y_1, Y_2,
+  Y_3, \ldots, Y_M$. The goal is to find a value $m$ so that
+  $\bbP\\left[ \mathcal{A}(Z) \right = 0] \ge 1-\alpha$ and
+$\bbQ\\left[ \mathcal{A}(Z) \right = 1] \ge 1-\alpha$.  In words, find
+the value of $m$ necessary to  make the $\bbP^m$-measure of
+$\mathcal{A}(Z) = 0$ large and simultaneously make the $\bbQ^m$-measure of
+$\mathcal{A}(Z) = 1$ large.
+
+Recall
+the \defn{Total Variation distance} of \( \bbP^m \) from \(
+    \bbQ^{m} \) is%
+    \index{total variation distance}
+    \[
+        \| \bbP^m - \bbQ^m \|_{TV} = \max_{A \subset \Omega} \abs{ \bbP^m(A) -
+        \bbQ^m(A)}.
+    \]
+So now the goal is to find a value $m$ so that $\| \bbP^m - \bbQ^m
+\|_{TV} \ge 1 - 2\alpha$.
+Pinsker's Inequality says that for measures $\mu$ and $\nu$
+\index{Pinsker's Inequality}
+\[
+     D_{KL}(\mu \parallel \nu) \ge 2 \| \mu - \nu \|_{TV}
+\]
+where $D_{KL}(\mu \parallel \nu)$ is the Kullback-Liebler Divergence of
+$\mu$ compared to $\nu$.
+\index{Kullback-Liebler Divergence}.  The Kullback-Liebler Divergence
+satisfies the identity $D_{KL}(\mu^m \parallel\nu^m) = m D_{KL}(\mu
+\parallel\nu)$, sometimes called the ``chain rule''.
+
+Applying these notions to the case of distinguishing the coins,
+\[
+  D_{KL}(1/2  \parallel 1/2 + \epsilon) = m D_{KL}(\bbP \parallel
+  \bbQ) = D_{KL}(\bbP^m \parallel \bbQ^m) \ge \| \bbP^m - \bbQ^m
+  \|_{TV} \ge 2 (1 - 2\delta)^2.
+\]
+Solving for $m$
+\[
+  m \ge \frac{2 (1 - 2\delta)^2}{D_{KL}(1/2  \parallel 1/2 +
+    \epsilon)} \ge \frac{2 (1 - 2\delta)^2}{6 \epsilon^2}.
+
 \subsection*{Sources}
 
 The definition of biased coin is from Wikipedia.

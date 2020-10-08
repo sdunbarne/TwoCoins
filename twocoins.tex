@@ -709,10 +709,10 @@ procedure.
 \subsection*{Analysis of All Possible Algorithms}
 
 The Weak
-Law of Large Numbers says that the probability that the biased coin will
+Law of Large Numbers says the probability the biased coin will
 have a majority of heads increases to \( 1 \) as the number of flips
-increases.  In principle then, using an unlimited number of tosses will
-determine the biased coin.  But efficiency asks for a sufficient
+increases.   Thus using an unlimited number of tosses will
+determine the biased coin.  But efficiency asks for a necessary
 number of tosses to determine the biased coin with a satisfactory
 confidence.  The discussion above gives several algorithms each with
 some number of tosses, often a large number, required to determine the
@@ -722,12 +722,13 @@ there a minimum number of tosses necessary to determine the biased
 coin with a certain confidence?  The goal of this subsection is to get
 a theoretical lower bound on the necessary number of tosses.
 
-The model is as follows \( X_1, X_2, X_3, \ldots \) is a sequence of
-i.i.d. Bernoulli random variables with \( p = 1/2 \) and \( Y_1, Y_2,
-Y_3, \ldots \) is an independent sequence of
-i.i.d. Bernoulli random variables with \( p = 1/2 + \epsilon\).  For
+Let \( X_1, X_2, X_3, \ldots \) be a sequence of
+i.i.d.\  Bernoulli random variables with \( p = 1/2 \) and let \( Y_1, Y_2,
+Y_3, \ldots \) be an independent sequence of
+i.i.d.\ Bernoulli random variables with \( p = 1/2 + \epsilon\).  For
 reasons of simplicity which appear later, assume $0 < \epsilon <
-1/4$. Let $0 < \alpha < 1/2$ be the error tolerance or equivalently
+1/4$. (Is this actually necessary?)
+Let $0 < \alpha < 1/2$ be the error tolerance or equivalently
 $1/2 < 1- \alpha < 1$ is the confidence.  Let $\mathcal{A}$ be an
 algorithm, that is, a function which takes a binary string $Z = (Z_1, Z_2,
   Z_3, \ldots, Z_n)$ as input and outputs $0$ if the algorithm
@@ -754,7 +755,7 @@ So now the goal is to find a value $m$ so that $\| \bbP^m - \bbQ^m
 Pinsker's Inequality says that for measures $\mu$ and $\nu$
 \index{Pinsker's Inequality}
 \[
-     D_{KL}(\mu \parallel \nu) \ge 2 \| \mu - \nu \|_{TV}
+     D_{KL}(\mu \parallel \nu) \ge 2 \left( \| \mu - \nu \|_{TV}  \right)^2
 \]
 where $D_{KL}(\mu \parallel \nu)$ is the Kullback-Liebler Divergence of
 $\mu$ compared to $\nu$.
@@ -764,15 +765,104 @@ satisfies the identity $D_{KL}(\mu^m \parallel\nu^m) = m D_{KL}(\mu
 
 Applying these notions to the case of distinguishing the coins,
 \[
-  D_{KL}(1/2  \parallel 1/2 + \epsilon) = m D_{KL}(\bbP \parallel
-  \bbQ) = D_{KL}(\bbP^m \parallel \bbQ^m) \ge \| \bbP^m - \bbQ^m
-  \|_{TV} \ge 2 (1 - 2\delta)^2.
+  m D_{KL}(\bbP \parallel \bbQ) =
+  D_{KL}(\bbP^m \parallel \bbQ^m) \ge
+  \| \bbP^m - \bbQ^m \|_{TV} \ge 2 (1 - 2\delta)^2.
 \]
 Solving for $m$
 \[
   m \ge \frac{2 (1 - 2\delta)^2}{D_{KL}(1/2  \parallel 1/2 +
-    \epsilon)} \ge \frac{2 (1 - 2\delta)^2}{6 \epsilon^2}.
+    \epsilon)}
+\]
+where $D_{KL}(1/2  \parallel 1/2 + \epsilon)$ is a memorable shorthand
+for $D_{KL}(\bbP \parallel  \bbQ)$.
 
+Now expand the definition of $D_{KL}(1/2  \parallel 1/2 + \epsilon)$:
+\begin{align*}
+&= -\frac{1}{2} \left( \log \left( 1-2\epsilon \right) + \log \left(
+      1+2\epsilon \right) \right) \\
+  &= -\frac{1}{2} \log( 1- 4\epsilon^2 ) \\
+  &= -\frac{1}{2} \cdot -4 \epsilon^2 = 2 \epsilon^{2}
+\end{align*}
+(Check this again, since it is better than the notes.)
+
+Now combining this estimate with the inequality for $m$
+\[
+  m \ge \frac{2 (1 - 2\delta)^2}{2 \epsilon^2} =
+  (1 - 2\delta)^2 \epsilon^{-2}.
+\]
+The requirement that $\delta < 1/4$ guarantees that $(1 - 2\delta)^2 >
+1/4$.  However the main conclusion is that the lower bound for the
+number of flips is of the order of $\epsilon^{-2}$.
+
+The next step demonstrates an algorithm that achieves this bound, up
+to multiplicative constants.
+The proof uses the Chernoff bounds to put an upper bound on $m$ of the same
+order.  This means that there exists an algorithm $\mathcal{A}$ which
+achieves the achieves the $\delta$ error tolerance given $m$ flips
+where $m$ is of the order $\epsilon^{-2}$.
+
+The Chernoff bound for a binomial random variable $W \sim
+\operatorname{Bin}(n,p)$ and $0 < \alpha < p$, then
+\[
+  \Prob{W < n\alpha} \le \EulerE^{-n D_{KL}(1/2 \parallel 1/2+\epsilon) }.
+\]
+The Chernoff bound applied to a binomial random variable is the same
+as the Large Deviation Bound, see the definition of $h_+(\epsilon)$ and
+the statement of Theorem 3 in
+\link{http://www.math.unl.edu/~sdunbar1/ProbabilityTheory/Lessons/BernoulliTrials/LargeDeviations/largedeviations.html}{Large
+  Deviations} in the section on Large Deviations.
+
+Define algorithm $\mathcal{A}$ taking $Z = Z_1, Z_2, \ldots, Z_m$ as
+input by
+\[
+    \mathcal{A}(Z) =
+    \begin{cases}
+      1 & \text{ (fair coin) if the numer of Heads is less than \(
+        \frac{1}{2} + \frac{\epsilon}{2} \) } \\
+      0 & \text{ (biased coin) if the numer of Heads is greater than \(
+        \frac{1}{2} + \frac{\epsilon}{2} \) }.
+    \end{cases}
+\]
+By the Chernoff bounds
+\[
+  \Prob{X_1 + X_2 + \cdots + X_m \le (\frac{1}{2} + \frac{\epsilon}{2})}
+  &\le \EulerE^{-m D_{KL}(\frac{1}{2} + \frac{\epsilon}{2} \parallel \frac{1}{2}) } \\
+  \Prob{Y_1 + Y_2 + \cdots + Y_m \le (\frac{1}{2} + \frac{\epsilon}{2})}
+  &\le \EulerE^{-m D_{KL}(\frac{1}{2} + \frac{\epsilon}{2} \parallel \frac{1}{2}) }.
+\]
+The goal is to have both of these bounds less than $\alpha$, so it
+resolves to solving both inequalities for $m$.
+The first inequality becomes
+\[
+  m \ge \frac{\log(1/\alpha}{D_{KL}(\frac{1}{2} + \frac{\epsilon}{2}
+    \parallel \frac{1}{2})}.
+\]
+Likewise the second inequality also becomes
+\[
+  m \ge \frac{\log(1/\alpha}{D_{KL}(\frac{1}{2} + \frac{\epsilon}{2}
+    \parallel \frac{1}{2})}.
+\]
+As shown above  ${D_{KL}(\frac{1}{2} + \frac{\epsilon}{2}
+    \parallel \frac{1}{2}) \le 2 \epsilon^{-2}$ so choosing $m$ at least
+$2 \log(1/\alpha) \epsilon^{-2}$ suffices.
+
+Note the difference in the bounds for $\epsilon$ fixed.  The lower
+bound grows like $(1-2\alpha)^2$ while the upper bound grows like
+$\log(1/\alpha)$, For the specific examples considered at the
+begining, $\alpha = 0.05$ and $\epsilon = 0.10$, the lower bound is 
+\[
+  (1 - 2\delta)^2 \epsilon^{-2} = (1- 2 \cdot 0.05)^2 \cdot
+  (0.10)^{-2} = 81
+  \]
+  and the upper bound is
+  \[
+    2 \log(1/\alpha) \epsilon^{-2} = 2 \log(1/0.05) (0.10)^{-2} \approx 599.15.
+  \]
+The algorithms described above fall well within this range, closer to
+the lower bound.
+
+  
 \subsection*{Sources}
 
 The definition of biased coin is from Wikipedia.
@@ -793,6 +883,9 @@ with the statistical solution is original.
 
 The Bayesian analysis is adapted and extended from \\
 \link{https://laurentlessard.com/bookproofs/finding-the-doctored-coin}{Lessard,Finding the baised coin}.
+
+The necessary bounds for an arbitrary algorithm are adapted from
+lecture notes by Austin Eide.
 
 \nocite{white17}
 \nocite{maclean10}

@@ -1,14 +1,13 @@
-%%% -*-LaTex-*-
+%%% -*-LaTeX-*-
 %%% twocoins.tex.orig
 %%% Prettyprinted by texpretty lex version 0.02 [21-May-2001]
-%%% on Thu Sep  6 08:06:18 2018
+%%% on Mon Oct 12 11:15:19 2020
 %%% for Steve Dunbar (sdunbar@family-desktop)
 
 \documentclass[12pt]{article}
 
-\input{../../../../etc/macros} 
-\input{../../../../etc/mzlatex_macros}
-%% \input{../../../../etc/pdf_macros}
+\input{../../../../etc/macros} %% \input{../../../../etc/mzlatex_macros}
+\input{../../../../etc/pdf_macros}
 
 \bibliographystyle{plain}
 
@@ -36,17 +35,17 @@
 % Everyone: contains no mathematics.
 % Student: contains scenes of mild algebra or calculus that may require guidance.
 Mathematically Mature:  may contain mathematics beyond calculus with
-proofs.  % Mathematicians Only: prolonged scenes of intense rigor.
+proofs.  \\
+Mathematicians Only:  prolonged scenes of intense rigor.
 
 \hr
 
 \visual{Section Starter Question}{../../../../CommonInformation/Lessons/question_mark.png}
 \section*{Section Starter Question}
 
-You have with two coins:  one is fair and the other has a biased chance \(
-p > \frac{1}{2} \) of coming up heads.  Unfortunately, you don't know
-which is which.  How can you determine which is the biased coin?  What
-do you need to know?
+You have two identical coins except one is fair and the other has a
+biased chance \( p > \frac{1}{2} \) of coming up heads.  Unfortunately,
+you don't know which is which.  How can you find the biased coin?
 
 \hr
 
@@ -66,6 +65,10 @@ do you need to know?
         Bayesian analysis using likelihood ratios as statistical
         evidence of a biased coin in a sequence of paired coin flips of
         a biased coin and a fair coin.
+    \item
+        A theoretical analysis using probabilistic inequalities shows a
+        necessary and sufficient number of flips is of the order \( (p-1/2)^
+        {-2} \).
 \end{enumerate}
 
 \hr
@@ -104,7 +107,7 @@ do you need to know?
 
 \subsection*{A Simple Probability Problem}
 
-This problem serves as a warmup for the more detailed investigations
+This problem serves as a warm-up for the more detailed investigations
 below.
 
 You have two coins.  One is fair with \( \Prob{H} = \frac{1}{2} \).  The
@@ -130,15 +133,14 @@ is
     \frac{1}{3} \right)^1 = \frac{2}{9}.
 \]
 
-This means it was more likely the biased coin was tossed once
-while the fair coin was tossed three times.
+This means it was more likely the biased coin was tossed once while the
+fair coin was tossed three times.
 
 \subsubsection*{Using Bayes Theorem}
 
-Take a uniform prior, that is, assume that the first coin is equally
-likely to be either of the two coins.  Let \( K = (k_1, k_2) \) denote
-the observation, and \( B \) the event that the first coin is biased.
-Then
+Take a uniform prior, that is, assume the fair coin is equally likely to
+be either of the two coins.  Let \( K = (k_1, k_2) \) denote the
+observation, and \( B \) the event that the first coin is biased. Then
 \[
     \Prob{B} = \Prob{B^C} = \frac{1}{2}.
 \]
@@ -153,7 +155,8 @@ The conditional probabilities are
     {3} \right)^2 \left( \frac{1}{3} \right)^1 = \frac{2}{9}.
 \]
 
-From Bayes Theorem,
+From Bayes Theorem,~%
+\index{Bayes Theorem}
 \begin{align*}
     \Prob{B \given K} &= \frac{\Prob{K \given B} \cdot \Prob{B}}{\Prob{K
     \given B} \cdot \Prob{B} + \Prob{K \given B^C} \cdot \Prob{B^C}} \\
@@ -162,14 +165,16 @@ From Bayes Theorem,
 
 \subsubsection*{Using Likelihood Ratios}
 
-Take even prior odds to be even, that is, assume that the first coin is
+Take even prior odds to be even, that is, assume the fair coin is
 equally likely to be either of the two coins.  Let \( K = (k_1, k_2) \)
-be the observed outcomes.  The likelihood ratio is
+be the observed outcomes.  The likelihood ratio is~%
+\index[likelihood ratio]
 
 \begin{align*}
     L(K) &= \frac{\Prob{K \given B}}{\Prob{K \given B^C}} \\
-    &= \frac{\frac{2}{3} \binom{3}{2} \left( \frac{1}{2} \right)^3}{\frac{1}{2} \cdot
-    \binom{3}{2} \left( \frac{2}{3} \right)^2 \left(\frac{1}{3} \right)^1} \\
+    &= \frac{\frac{2}{3} \binom{3}{2} \left( \frac{1}{2} \right)^3}{\frac
+    {1}{2} \cdot \binom{3}{2} \left( \frac{2}{3} \right)^2 \left(\frac{1}
+    {3} \right)^1} \\
     &= \frac{6/24}{12/54} = \frac{9}{8}.
 \end{align*}
 
@@ -186,9 +191,9 @@ puzzle column on September 29, 2017:
     On the table in front of you are two coins.  They look and feel
     identical, but you know one of them has been doctored.  The fair
     coin comes up heads half the time while the doctored coin comes up
-    heads \( 60 \) percent of the time.  How many flips -- you must
-    flip both coins at once, one with each hand -- would you need to
-    give yourself a \( 95 \) percent chance of correctly identifying the
+    heads \( 60 \) percent of the time.  How many flips -- you must flip
+    both coins at once, one with each hand -- would you need to give
+    yourself a \( 95 \) percent chance of correctly identifying the
     doctored coin?
 
     Extra credit:  What if, instead of \( 60 \) percent, the doctored
@@ -197,27 +202,29 @@ puzzle column on September 29, 2017:
 \end{quotation}
 
 This problem appeared in a paper ``What's Past is \emph{Not} Prologue''
-by James White, Jeff Rosenbluth, and Victor Haghani.  In turn, a problem
-posed in a paper ``Good and bad properties of the Kelly criterion'' by
-MacLean, Thorp and Ziemba inspired the problem by White, Rosenbluth, and
-Haghani.
+by James White, Jeff Rosenbluth, and Victor Haghani
+\cite{white17}.  In turn, a problem posed in a paper ``Good and bad
+properties of the Kelly criterion'' by MacLean, Thorp and Ziemba
+\cite{maclean10} inspired the problem by White, Rosenbluth, and Haghani.
 
 Solving this problem requires some interpretation and computation.
 
 \subsection*{Probability of a Majority of Heads}
 
-% Potentially change notation for Q to reflect R notation
-% Check the covariance assertion
+A sequence of independent Bernoulli trials with probability \( 1/2 \) of
+success on each trial is metaphorically called a \defn {fair} coin. One
+for which the probability is not \( 1/2 \) is a \defn{biased} or \defn{unfair}
+coin.  Continuing the coin metaphor, The trials are often called flips.
 
-In any fixed number of simultaneous flips, there is always a chance that
-the fair coin will have more heads than the biased coin.  But the Weak
-Law of Large Numbers says that the probability that the biased coin will
-have a majority of heads increases to \( 1 \) as the number of flips
-increases.  One way to determine which is the biased coin is to choose
-the coin which has a majority of heads.  The authors White, Rosenbluth,
-and Haghani want to calculate how many paired flips of \( 2 \) coins,
-one biased and one fair, we must observe in order to be \( 95\% \)
-confident that the coin with more heads is the biased coin.
+Any fixed number of simultaneous flips always has a chance that the fair
+coin will have more heads than the biased coin.  But the Weak Law of
+Large Numbers says the probability that the biased coin will have a
+majority of heads increases to \( 1 \) as the number of flips increases.
+One way to decide which is the biased coin is to choose the coin which
+has a majority of heads.  The authors White, Rosenbluth, and Haghani
+want to calculate how many paired flips of \( 2 \) coins, one biased and
+one fair, we must observe in order to be \( 95\% \) confident that the
+coin with more heads is the biased coin.
 
 Assuming independence, since each coin has a binomial distribution the
 joint probability mass distribution after \( n \) flips is the product
@@ -278,14 +285,14 @@ flips required also decreases as the certainty decreases.
 \begin{figure}[htbp]
     \centerline{\includegraphics[]{majorityBinarySearch.pdf}}
     \caption{The number of flips $ N $ required to get a majority of
-    heads with certainty $ 0.95 $ (black), $ 0.9 $ (red) and $ 0.75$
-    (blue).}%
+    heads with certainty $ 0.95 $ (black), $ 0.9 $ (red) and $ 0.75
+    $ (blue).}%
     \label{fig:twocoins:majorityBinarySearch}
 \end{figure}
 
 \subsection*{Using the Central Limit Theorem}
 
-Assume that the biased coin is in the left hand.%
+Assume the biased coin is in the left hand.%
 \index{biased coin}
 Let \( L_j \) be the result of left-hand coin flip \( j \), knowing it
 is biased so \( L_j = \text{Head} = 1 \) with probability \( 0.6 \), \(
@@ -322,8 +329,8 @@ The goal is find a number of flips such that with high probability the
 sample mean \( S_n \) is closer to the theoretical mean \( 0.1 \) (when
 the biased coin is in the left hand) than the value \( -0.1 \) (the
 theoretical mean coming from the situation with the biased coin in the
-right hand). Take ``the sample mean closer to \( 0.1 \) than \( -0.1 \)''
-to mean that \( S_n \) is closer to \( 0.1 \) than the distance to the
+right hand).  Take ``the sample mean closer to \( 0.1 \) than \( -0.1 \)''
+to mean \( S_n \) is closer to \( 0.1 \) than the distance to the
 midpoint \( 0 \) between the two means.  Precisely, the goal is to find \(
 n \) so that \( \Prob{S_n - 0.1 > -0.1} \ge 0.95 \).  This is the same
 event as \( \Prob{S_n > 0} = \Prob{L_n-R_n > 0} = \Prob{L_n > R_n} \)
@@ -344,10 +351,10 @@ The reason is that \texttt{convpow} ignores points with probability less
 than \( 10^{-16} \) and so these points are not included in the domain.
 So use \texttt{match(0, (support(D100)))} to find the index of \( 0 \).
 This turns out to be index \( 47 \).  So summing the distribution over
-indices from \( 47+1 \) to \( 111 \) gives the probability that the
-random variable \( S_{n} > 0 \). Searching for a value of \( n \) large
-enough that the probability exceeds \( 0.95 \) gives the required number
-of flips. From some experimentation, the numerical support of the
+indices from \( 47+1 \) to \( 111 \) gives the probability of the random
+variable \( S_{n} > 0 \).  Searching for a value of \( n \) large enough
+that the probability exceeds \( 0.95 \) gives the required number of
+flips.  From some experimentation, the numerical support of the
 distribution is positive for \( n \ge 150 \), that is, \( \Prob{S_{n}
 \ge 0} = 1 \) for \( n \ge 150 \).  That means that the numerical search
 should start from a high of \( 150 \).
@@ -365,8 +372,8 @@ for certainty \( 0.9 \) and \( 3 \) for certainty \( 0.75 \).
 \begin{figure}[htbp]
     \centerline{\includegraphics[]{statisticalBinarySearch.pdf}}
     \caption{The number of flips $ N $ required to statistically
-    distinguish a coin with probability $ p $ from a fair coin with $
-    0.95 $ (black), $ 0.9 $ (red) and $ 0.75 $ (blue).}%
+    distinguish a coin with probability $ p $ from a fair coin with
+    $ 0.95 $ (black), $ 0.9 $ (red) and $ 0.75 $ (blue).}%
     \label{fig:twocoins:statisticalBinarySearch}
 \end{figure}
 
@@ -425,14 +432,16 @@ for number of heads for the biased coin.
 
 The probability that the majority of flips is from the biased coin is
 the sum of the probabilities in the strict upper triangle of the support
-of the bivariate distribution.  The shaded portion of Figure~%
+of the bivariate distribution.  The shaded part of Figure~%
 \ref{fig:twocoins:bivariate} shows this domain.
 
-The \emph{multinomial probability distribution} on \( -10 \) to \( 10 \)
-of the sum \( \sum\limits_{j=0}^{10} (L_j-R_j) \) is the sum of the
-probabilities along diagonals of the bivariate binomial distribution as
-indicated by the red arrows.  In the case the biased coin has \( p=0.6 \)
-so the mean of \( L_n - R_n = 0.1 \), the probability of the event
+The \emph{multinomial probability distribution}%
+\index{multinomial probability}
+on \( -10 \) to \( 10 \) of the sum \( \sum\limits_{j=0}^{10} (L_j-R_j) \)
+is the sum of the probabilities along diagonals of the bivariate
+binomial distribution as indicated by the red arrows.  In the case the
+biased coin has \( p=0.6 \) so the mean of \( L_n - R_n = 0.1 \), the
+probability of the event
 \begin{align*}
     [S_n > 0] &= \left[\frac{1}{n} \sum\limits_{j=1}^n (L_j-R_j) > 0
     \right] \\
@@ -464,7 +473,7 @@ is in the right hand.
 The coin flips are independent.  So if a coin comes up heads with
 probability \( p \) and we flip it \( n \) times, the binomial
 distribution \( B(k, n, p) = \binom{n}{k} p^k(1-p)^{n-k} \) gives the
-probability that it comes up heads exactly \( k \) times. Number the
+probability that it comes up heads exactly \( k \) times.  Number the
 coins \( 1 \) and \( 2 \) probabilities of coming up heads \( p_{1} \)
 and \( p_{2} \) respectively.  Flip each coin \( n \) times and record
 how many times each coin come up heads, but we don't know which coin is
@@ -477,8 +486,8 @@ Exactly two possible scenarios occur:
     \item[Fair on Left]
         Fair coin \( 1 \) was in the left hand and biased coin \( 2 \)
         was in the right hand and the observed outcome is \( k = (k_L, k_R)
-        \).  Call this scenario \( \theta_L \).  The likelihood of this
-        scenario occurring is
+        \).  Call this scenario \( \theta_L \).  The \defn{likelihood}
+        of this scenario occurring is
         \[
             Q(k \given \theta_L) = B(k_L, n, p_1)B(k_R, n, p_2).
         \]
@@ -491,17 +500,23 @@ Exactly two possible scenarios occur:
             Q(k \given \theta_R) = B(k_L, n, p_2)B(k_R, n, p_1).
         \]
 \end{description}
+If fair coin \( 1 \) is in the right hand and biased coin \( 2 \) is in
+the left hand then call this scenario \( \theta_R \).  The \defn{likelihood
+ratio} is
+\[
+    \frac{Q(k \given \theta_L)}{Q(k \given \theta_R)}.
+\]
 
 Compute the posterior probability by using Bayes’ rule:
 \[
-    Q( \theta_L | k ) = \frac{Q(k \given \theta_L) \cdot \Prob{\theta_L}}
+    Q( \theta_L \given k ) = \frac{Q(k \given \theta_L) \cdot \Prob{\theta_L}}
     {Q(k \given \theta_L ) \cdot \Prob{\theta_L} + Q(k \given \theta_R )
     \cdot \Prob{\theta_R}}
-\] and similarly for \( Q( \theta_R | k ) \).%
+\] and similarly for \( Q( \theta_R \given k ) \).%
 \index{Bayes' rule}
-Assume that scenarios \( \theta_L \) and \( \theta_R \) have the same
-prior probability so \( \Prob{\theta_L} = \Prob{\theta_R} = 1/2 \).
-Therefore, the Bayesian condition for confidence simplifies to
+Assume scenarios \( \theta_L \) and \( \theta_R \) have the same prior
+probability so \( \Prob{\theta_L} = \Prob{\theta_R} = 1/2 \). Therefore,
+the Bayesian condition for confidence simplifies to
 \[
     \frac{Q(k \given \theta_L)}{Q(k \given \theta_L) + Q(k \given \theta_R)
     } > 1- \alpha \text{ or } \frac{Q(k \given \theta_R)}{Q(k \given
@@ -520,7 +535,8 @@ the posterior probability must be greater than \( 1 - \alpha \).
 \end{description}
 By definition, \( Q(\theta_L \given k ) + Q(\theta_R \given k ) = 1 \)
 for all \( k \).  So the two cases above can't simultaneously be true
-when \( \alpha < 1/2 \).  Rearranging these inequalities, we have
+when \( \alpha < 1/2 \).  Rearranging these inequalities, we have the
+likelihood ratio
 \[
     \frac{Q(k \given \theta_L)}{Q(k \given \theta_R)} > \frac{1-\alpha}{\alpha}
     \text{ or } \frac{Q(k \given \theta_R)}{Q(k \given \theta_L)} >
@@ -531,10 +547,9 @@ when \( \alpha < 1/2 \).  Rearranging these inequalities, we have
 The implication is that we can stop flipping coins once the difference
 between log-likelihoods grows sufficiently large.  The smaller is \(
 \alpha \), the larger the difference in log-likelihoods must be before
-we can declare that we are confident. Simplify the expression by
-substituting the definition for the likelihoods \( Q(k \given \theta_L) \)
-and \( Q(k \given \theta_R) \) in terms of the binomial probabilities
-becoming
+we are confident.  Simplify the expression by substituting the
+definition for the likelihoods \( Q(k \given \theta_L) \) and \( Q(k
+\given \theta_R) \) in terms of the binomial probabilities becoming
 \[
     \frac{Q(k \given \theta_L)}{Q(k \given \theta_R)} = \left(\frac{p_1}
     {p_2} \right)^{k_L - k_R} \cdot \left(\frac{1-p_2}{1-p_1} \right)^{k_L
@@ -549,7 +564,8 @@ single inequality involving the absolute difference of log-likelihoods
 The implication is that we can stop flipping coins once the difference
 between log-likelihoods grows sufficiently large.  The smaller is \(
 \alpha \), the larger the difference in log-likelihoods must be before
-we can declare that we are confident. After simplification, this becomes
+we can declare that we are confident.  After simplification, this
+becomes
 \[
     \abs{k_L - k_R} \cdot \abs{ \log\left( \frac{1}{p_1} - 1 \right) -
     \log\left( \frac{1}{p_2} - 1 \right) } > \log \left( \frac{1}{\alpha}
@@ -559,9 +575,9 @@ we can declare that we are confident. After simplification, this becomes
 The number of heads \( k_L \) and \( k_R \) in the left and right hands
 are random variables.  In one hand the number of heads from the coin
 with \( p_1 \) will have the binomial probability distribution with mean
-\( np_1 \) and standard deviation \( \sqrt{np_1(1-p_1)} \). In the other
-hand the number of heads from the coin with \( p_1 \) will have the
-binomial probability distribution with mean \( np_2 \) and standard
+\( np_1 \) and standard deviation \( \sqrt{np_1(1-p_1)} \).  In the
+other hand the number of heads from the coin with \( p_1 \) will have
+the binomial probability distribution with mean \( np_2 \) and standard
 deviation \( \sqrt{np_2(1-p_2)} \).  Normal distributions with
 corresponding means and standard deviations can approximate each
 binomial distribution.
@@ -578,8 +594,8 @@ in terms of the confidence \( \alpha \), the known probabilities \( p_1 \)
 and \( p_2 \) and the empirical probabilities \( \hat{p}_1 \) and \(
 \hat{p}_2 \).  Note that if \( p_1 - p_2 \to 0 \), then \( n \to \infty \)
 which is expected.  Taking \( \hat{p}_1 = p_1 = 0.5 \), \( \hat{p}_2 = p_2
-= 0.6 \) and \( \alpha = 0.05 \), then \( n = 72.619 \). More generally,
-Figure~%
+= 0.6 \) and \( \alpha = 0.05 \), then \( n = 72.619 \).  More
+generally, Figure~%
 \ref{fig:twocoins:flips} shows a plot of the number of flips required as
 a function of \( p_2 \) for fixed \( p_1 = 0.5 \) and fixed \( \alpha =
 0.05 \), so in percentages, \( 95\% \) confidence.
@@ -633,7 +649,7 @@ k_L \) in the range \( [0, np_1+z_{\beta}\sqrt{np_1(1-p_1)}] \) and \( k_R
 \) in the range \( [ np_2 - z_{\beta}\sqrt{np_2(1-p_2)}, n] \).  The
 probability of each of these events is determined by quantiles \( z_{\beta}
 \) of the binomial distribution, or approximately by the normal
-distribution. Since \( \sqrt{np_2(1-p_2)} < \sqrt{n \cdot \frac{1}{2}
+distribution.  Since \( \sqrt{np_2(1-p_2)} < \sqrt{n \cdot \frac{1}{2}
 \cdot \frac{1}{2}} = \frac{1}{2}\sqrt{n} \)
 \begin{align*}
     \abs{k_L - k_R} &> (np_2 - z_{\beta}\sqrt{np_2(1-p_2)}) - (np_1+z_{\beta}\sqrt
@@ -642,15 +658,14 @@ distribution. Since \( \sqrt{np_2(1-p_2)} < \sqrt{n \cdot \frac{1}{2}
     \sqrt{n} \\
     &> n(p_2-p_1) - z_{\beta} \sqrt{n}
 \end{align*}
-with probability determined by the quantile \( z_{\beta} \).  Note that
-\( p_2-p_1 >0 \), so \( n(p_2-p_1) - z_{\beta} \sqrt{n} \)
-is positive for sufficiently large \( n \).
-The number of flips then required to determine which is the biased coin
-is then determined by
+with probability determined by the quantile \( z_{\beta} \).  Note that \(
+p_2-p_1 >0 \), so \( n(p_2-p_1) - z_{\beta} \sqrt{n} \) is positive for
+sufficiently large \( n \). The number of flips then required to
+identify the biased coin is then determined by
 \[
-    n(p_2-p_1) - z_{\beta} \sqrt{n} > 
-     \frac{\log \left(\frac{1}{\alpha} - 1 \right)}{\abs{ \log\left
-    ( \frac{1}{p_1} - 1 \right) - \log\left( \frac{1}{p_2} - 1 \right) }}.
+    n(p_2-p_1) - z_{\beta} \sqrt{n} > \frac{\log \left(\frac{1}{\alpha}
+    - 1 \right)}{\abs{ \log\left ( \frac{1}{p_1} - 1 \right) - \log\left
+    ( \frac{1}{p_2} - 1 \right) }}.
 \] Choosing a quantile \( z_{\beta} \), substituting for \( p_1 \), \( p_2
 \) and \( \alpha \), and then solving for \( n \) gives a lower bound
 for the number of flips required for distinguishing the fair coin from
@@ -660,34 +675,34 @@ For example, choosing \( z_{\beta} = 1.96 \) gives the approximate
 probability \( \beta = 0.975 \) that \( k_L \) is in the range \( [0, np_1+z_
 {\beta}\sqrt{np_1(1-p_1)}] \) and independently that \( k_R \) is in the
 range \( [ np_2 - z_{\beta}\sqrt{np_2(1-p_2)}, n] \).  Then the
-probability of both events is  \( (0.975)^2 \approx 0.95 \).
-Using \( p_1 = 0.5 \), \( p_2 = 0.6 \) and \( \alpha = 0.05 \), the
-inequality is approximately
+probability of both events is \( (0.975)^2 \approx 0.95 \). Using \( p_1
+= 0.5 \), \( p_2 = 0.6 \) and \( \alpha = 0.05 \), the inequality is
+approximately
 \[
     0.1 n - 1.96 \sqrt{n} > 7.26.
 \] Solving for \( n \) gives \( n \ 519.20 \).  As another example set \(
-z_{\beta} = 0.559 \) with an approximate probability of \( 0.712 \) of \( k_L \) in
-the range \( [0, np_1+z_{\beta}\sqrt{np_1(1-p_1)}] \) and independently
-that \( k_R \) in the range \( [ np_2 - z_{\beta}\sqrt{np_2(1-p_2)}, n] \)
-and joint probability of \( 0.507 \).  Then solving \( 0.1 n - 0.559
-\sqrt{n} > 7.26 \) gives \( n = 138.35 \).  As a final example, choosing \(
-z_{\beta} = 0 \) gives a probability of \( 0.5 \) of \( k_L \) in the
-range \( [0, np_1] \) and independently with probability approximately \(
-0.5 \) that \( k_R \) in the range \( [ np_2, n] \) and joint
-probability of \( 0.25 \).  This is equivalent to the original
-calculation giving the lower bound of \( n=72.6 \).
+z_{\beta} = 0.559 \) with an approximate probability of \( 0.712 \) of \(
+k_L \) in the range \( [0, np_1+z_{\beta}\sqrt{np_1(1-p_1)}] \) and
+independently that \( k_R \) in the range \( [ np_2 - z_{\beta}\sqrt{np_2
+(1-p_2)}, n] \) and joint probability of \( 0.507 \).  Then solving \(
+0.1 n - 0.559 \sqrt{n} > 7.26 \) gives \( n = 138.35 \).  As a last
+example, choosing \( z_{\beta} = 0 \) gives a probability of \( 0.5 \)
+of \( k_L \) in the range \( [0, np_1] \) and independently with
+probability approximately \( 0.5 \) that \( k_R \) in the range \( [ np_2,
+n] \) and joint probability of \( 0.25 \).  This is equivalent to the
+original calculation giving the lower bound of \( n=72.6 \).
 
 The extended Bayesian analysis introduces another parameter \( z_{\beta}
 \).  Using two parameters \( z_{\beta_1} \) and \( z_{\beta_2} \), as
 long as \( np_1+z_{\beta_1}\sqrt{np_1(1-p_1)} < np_2-z_{\beta_2}\sqrt{np_2
-(1-p_2)} \) for reasonable values of \( n \), might be better. Now some
+(1-p_2)} \) for reasonable values of \( n \), might be better.  Now some
 experimentation, including binary search, is necessary to choose a value
 of \( n \ge 73 \) required to determine the biased coin with certainty \(
 0.95 \).  The scripts below show the results of that experimentation and
 compare it to the other determination methods based on the majority and
 the Central Limit Theorem.  For example, with \( p_1 = 0.5 \) in the
 left hand, and \( p_2 = 0.6 \) in the right hand it takes \( 189 \)
-flips to identify the fair coin in the left hand with \( 95\% \)
+flips to indentify the fair coin in the left hand with \( 95\% \)
 certainty.  A close look at the results show why the log-likelihood
 Bayesian criterion requires more flips for the same certainty.  The
 short answer is that the log-likelihood is a stricter requirement than
@@ -708,161 +723,153 @@ procedure.
 
 \subsection*{Analysis of All Possible Algorithms}
 
-The Weak
-Law of Large Numbers says the probability the biased coin will
+The Weak Law of Large Numbers says the probability the biased coin will
 have a majority of heads increases to \( 1 \) as the number of flips
-increases.   Thus using an unlimited number of tosses will
-determine the biased coin.  But efficiency asks for a necessary
-number of tosses to determine the biased coin with a satisfactory
-confidence.  The discussion above gives several algorithms each with
-some number of tosses, often a large number, required to determine the
-biased coin with some confidence.  But the question remains, are
-these the best algorithms?  That is,  among all possible algorithms is
-there a minimum number of tosses necessary to determine the biased
-coin with a certain confidence?  The goal of this subsection is to get
-a theoretical lower bound on the necessary number of tosses.
+increases.  Thus using an unlimited number of tosses will determine the
+biased coin.  But efficiency asks for a necessary number of tosses to
+determine the biased coin with a satisfactory confidence.  The
+discussion above gives several algorithms each with some number of
+tosses, often a large number, required to determine the biased coin with
+some confidence.  But the question remains, are these the best
+algorithms?  That is, among all possible algorithms is there a minimum
+number of tosses necessary to determine the biased coin with a certain
+confidence?  The goal of this subsection is to get a theoretical lower
+bound on the necessary number of tosses.
 
-Let \( X_1, X_2, X_3, \ldots \) be a sequence of
-i.i.d.\  Bernoulli random variables with \( p = 1/2 \) and let \( Y_1, Y_2,
-Y_3, \ldots \) be an independent sequence of
-i.i.d.\ Bernoulli random variables with \( p = 1/2 + \epsilon\).  For
-reasons of simplicity which appear later, assume $0 < \epsilon <
-1/4$. (Is this actually necessary?)
-Let $0 < \alpha < 1/2$ be the error tolerance or equivalently
-$1/2 < 1- \alpha < 1$ is the confidence.  Let $\mathcal{A}$ be an
-algorithm, that is, a function which takes a binary string $Z = (Z_1, Z_2,
-  Z_3, \ldots, Z_n)$ as input and outputs $0$ if the algorithm
-  determines $Z_i \sim X_i$ and outputs $1$ if the algorithm
-  determines $Z_i \sim Y_i$. Let $\bbP^m$ be the distribution of $X_1, X_2,
-  X_3, \ldots, X_m$ and $\bbQ^{m}$ be the distribution of $Y_1, Y_2,
-  Y_3, \ldots, Y_M$. The goal is to find a value $m$ so that
-  $\bbP\\left[ \mathcal{A}(Z) \right = 0] \ge 1-\alpha$ and
-$\bbQ\\left[ \mathcal{A}(Z) \right = 1] \ge 1-\alpha$.  In words, find
-the value of $m$ necessary to  make the $\bbP^m$-measure of
-$\mathcal{A}(Z) = 0$ large and simultaneously make the $\bbQ^m$-measure of
-$\mathcal{A}(Z) = 1$ large.
+Let \( X_1, X_2, X_3, \ldots \) be a sequence of i.i.d.\ Bernoulli
+random variables with \( p = 1/2 \) and let \( Y_1, Y_2, Y_3, \ldots \)
+be an independent sequence of i.i.d.\ Bernoulli random variables with \(
+p = 1/2 + \epsilon \). Let \( 0 < \alpha < 1/2 \) be the error tolerance
+or equivalently \( 1/2 < 1- \alpha < 1 \) is the confidence.  Let \(
+\mathcal{A} \) be an algorithm, that is, a function which takes a binary
+string \( Z = (Z_1, Z_2, Z_3, \ldots, Z_n) \) as input and outputs \( 0 \)
+if the algorithm determines \( Z_i \sim X_i \) and outputs \( 1 \) if
+the algorithm determines \( Z_i \sim Y_i \).  Let \( \bbP^m \) be the
+distribution of \( X_1, X_2, X_3, \ldots, X_m \) and \( \bbQ^{m} \) be
+the distribution of \( Y_1, Y_2, Y_3, \ldots, Y_M \).  The goal is to
+find a value \( m \) so that \( \bbP
+\left[ \mathcal{A}(Z)  = 0 \right] \ge 1-\alpha \) and \( \bbQ
+\left[ \mathcal{A}(Z) = 1 \right] \ge 1-\alpha \).  In words, find the
+value of \( m \) necessary to make the \( \bbP^m \)-measure of \(
+\mathcal{A}(Z) = 0 \) large and simultaneously make the \( \bbQ^m \)-measure
+of \( \mathcal{A}(Z) = 1 \) large.
 
-Recall
-the \defn{Total Variation distance} of \( \bbP^m \) from \(
-    \bbQ^{m} \) is%
-    \index{total variation distance}
-    \[
-        \| \bbP^m - \bbQ^m \|_{TV} = \max_{A \subset \Omega} \abs{ \bbP^m(A) -
-        \bbQ^m(A)}.
-    \]
-So now the goal is to find a value $m$ so that $\| \bbP^m - \bbQ^m
-\|_{TV} \ge 1 - 2\alpha$.
-Pinsker's Inequality says that for measures $\mu$ and $\nu$
+Recall the \defn{Total Variation distance} of \( \bbP^m \) from \( \bbQ^
+{m} \) is%
+\index{total variation distance}
+\[
+    \| \bbP^m - \bbQ^m \|_{TV} = \max_{A \subset \Omega} \abs{ \bbP^m(A)
+    - \bbQ^m(A)}.
+\] So now the goal is to find a value \( m \) so that \( \| \bbP^m -
+\bbQ^m \|_{TV} \ge 1 - 2\alpha \). Pinsker's Inequality says that for
+measures \( \mu \) and \( \nu \)%
 \index{Pinsker's Inequality}
 \[
-     D_{KL}(\mu \parallel \nu) \ge 2 \left( \| \mu - \nu \|_{TV}  \right)^2
-\]
-where $D_{KL}(\mu \parallel \nu)$ is the Kullback-Liebler Divergence of
-$\mu$ compared to $\nu$.
-\index{Kullback-Liebler Divergence}.  The Kullback-Liebler Divergence
-satisfies the identity $D_{KL}(\mu^m \parallel\nu^m) = m D_{KL}(\mu
-\parallel\nu)$, sometimes called the ``chain rule''.
+    D_{KL}(\mu \parallel \nu) \ge 2 \left( \| \mu - \nu \|_{TV} \right)^2
+\] where \( D_{KL}(\mu \parallel \nu) \) is the Kullback-Liebler
+Divergence of \( \mu \) compared to \( \nu \).%
+\index{Kullback-Liebler Divergence}%
+.  The Kullback-Liebler Divergence satisfies the identity \( D_{KL}(\mu^m
+\parallel\nu^m) = m D_{KL}(\mu \parallel\nu) \), sometimes called the
+``chain rule''.
 
 Applying these notions to the case of distinguishing the coins,
 \[
-  m D_{KL}(\bbP \parallel \bbQ) =
-  D_{KL}(\bbP^m \parallel \bbQ^m) \ge
-  \| \bbP^m - \bbQ^m \|_{TV} \ge 2 (1 - 2\delta)^2.
-\]
-Solving for $m$
+    m D_{KL}(\bbP \parallel \bbQ) = D_{KL}(\bbP^m \parallel \bbQ^m) \ge
+    \| \bbP^m - \bbQ^m \|_{TV} \ge 2 (1 - 2\delta)^2.
+\] Solving for \( m \)
 \[
-  m \ge \frac{2 (1 - 2\delta)^2}{D_{KL}(1/2  \parallel 1/2 +
-    \epsilon)}
-\]
-where $D_{KL}(1/2  \parallel 1/2 + \epsilon)$ is a memorable shorthand
-for $D_{KL}(\bbP \parallel  \bbQ)$.
+    m \ge \frac{2 (1 - 2\delta)^2}{D_{KL}(1/2 \parallel 1/2 + \epsilon)}
+\] where \( D_{KL}(1/2 \parallel 1/2 + \epsilon) \) is a memorable
+shorthand for \( D_{KL}(\bbP \parallel \bbQ) \).
 
-Now expand the definition of $D_{KL}(1/2  \parallel 1/2 + \epsilon)$:
+Now expand the definition of \( D_{KL}(1/2 \parallel 1/2 + \epsilon) \):
 \begin{align*}
-&= -\frac{1}{2} \left( \log \left( 1-2\epsilon \right) + \log \left(
-      1+2\epsilon \right) \right) \\
-  &= -\frac{1}{2} \log( 1- 4\epsilon^2 ) \\
-  &= -\frac{1}{2} \cdot -4 \epsilon^2 = 2 \epsilon^{2}
+    &= -\frac{1}{2} \left( \log \left( 1-2\epsilon \right) + \log \left(
+    1+2\epsilon \right) \right) \\
+    &= -\frac{1}{2} \log( 1- 4\epsilon^2 ) \\
+    &= -\frac{1}{2} \cdot -4 \epsilon^2 = 2 \epsilon^{2}
 \end{align*}
 (Check this again, since it is better than the notes.)
 
-Now combining this estimate with the inequality for $m$
+Now combining this estimate with the inequality for \( m \)
 \[
-  m \ge \frac{2 (1 - 2\delta)^2}{2 \epsilon^2} =
-  (1 - 2\delta)^2 \epsilon^{-2}.
-\]
-The requirement that $\delta < 1/4$ guarantees that $(1 - 2\delta)^2 >
-1/4$.  However the main conclusion is that the lower bound for the
-number of flips is of the order of $\epsilon^{-2}$.
+    m \ge \frac{2 (1 - 2\delta)^2}{2 \epsilon^2} = (1 - 2\delta)^2
+    \epsilon^{-2}.
+\] The requirement that \( \delta < 1/4 \) guarantees that \( (1 - 2\delta)^2
+> 1/4 \).  However the main conclusion is that the lower bound for the
+number of flips is of the order of \( \epsilon^{-2} \).
 
-The next step demonstrates an algorithm that achieves this bound, up
-to multiplicative constants.
-The proof uses the Chernoff bounds to put an upper bound on $m$ of the same
-order.  This means that there exists an algorithm $\mathcal{A}$ which
-achieves the achieves the $\delta$ error tolerance given $m$ flips
-where $m$ is of the order $\epsilon^{-2}$.
+The next step demonstrates an algorithm that achieves this bound, up to
+multiplicative constants. The proof uses the Chernoff bounds to put an
+upper bound on \( m \) of the same order.  This means that there exists
+an algorithm \( \mathcal{A} \) which achieves the \( \delta \) error
+tolerance given \( m \) flips where \( m \) is of the order \( \epsilon^
+{-2} \).
 
-The Chernoff bound for a binomial random variable $W \sim
-\operatorname{Bin}(n,p)$ and $0 < \alpha < p$, then
+The Chernoff bound~%
+\index{Chernoff bound}
+for a binomial random variable \( W \sim
+\operatorname{Bin}
+(n,p) \) and \( 0 < \alpha < p \), then
 \[
-  \Prob{W < n\alpha} \le \EulerE^{-n D_{KL}(1/2 \parallel 1/2+\epsilon) }.
-\]
-The Chernoff bound applied to a binomial random variable is the same
-as the Large Deviation Bound, see the definition of $h_+(\epsilon)$ and
-the statement of Theorem 3 in
-\link{http://www.math.unl.edu/~sdunbar1/ProbabilityTheory/Lessons/BernoulliTrials/LargeDeviations/largedeviations.html}{Large
-  Deviations} in the section on Large Deviations.
+    \Prob{W < n\alpha} \le \EulerE^{-n D_{KL}(1/2 \parallel 1/2+\epsilon)
+    }.
+\] The Chernoff bound applied to a binomial random variable is the same
+as the Large Deviation Bound~%
+\index{large deviations}
+for a binomial random variable, see the definition of \( h_+(\epsilon) \)
+and the statement of Theorem 3 in \link{http://www.math.unl.edu/~sdunbar1/ProbabilityTheory/Lessons/BernoulliTrials/LargeDeviations/largedeviations.html}
+{Large Deviations} in the section on Large Deviations.
 
-Define algorithm $\mathcal{A}$ taking $Z = Z_1, Z_2, \ldots, Z_m$ as
-input by
+Define algorithm \( \mathcal{A} \) taking \( Z = Z_1, Z_2, \ldots, Z_m \)
+as input by
 \[
     \mathcal{A}(Z) =
     \begin{cases}
-      1 & \text{ (fair coin) if the numer of Heads is less than \(
+        1 & \text{ (fair coin) if the numer of Heads is less than \(
         \frac{1}{2} + \frac{\epsilon}{2} \) } \\
-      0 & \text{ (biased coin) if the numer of Heads is greater than \(
+        0 & \text{ (biased coin) if the numer of Heads is greater than \(
         \frac{1}{2} + \frac{\epsilon}{2} \) }.
     \end{cases}
-\]
-By the Chernoff bounds
+\] By the Chernoff bounds
+\begin{align*}
+    \Prob{X_1 + X_2 + \cdots + X_m \le (\frac{1}{2} + \frac{\epsilon}{2})}
+    &\le \EulerE^{-m D_{KL}(\frac{1}{2} + \frac{\epsilon}{2} \parallel
+    \frac{1}{2}) } \\
+    \Prob{Y_1 + Y_2 + \cdots + Y_m \le (\frac{1}{2} + \frac{\epsilon}{2})}
+    &\le \EulerE^{-m D_{KL}(\frac{1}{2} + \frac{\epsilon}{2} \parallel
+    \frac{1}{2}) }.
+\end{align*}
+The goal is to have both of these bounds less than \( \alpha \), so
+it resolves to solving both inequalities for \( m \). The first
+inequality becomes
 \[
-  \Prob{X_1 + X_2 + \cdots + X_m \le (\frac{1}{2} + \frac{\epsilon}{2})}
-  &\le \EulerE^{-m D_{KL}(\frac{1}{2} + \frac{\epsilon}{2} \parallel \frac{1}{2}) } \\
-  \Prob{Y_1 + Y_2 + \cdots + Y_m \le (\frac{1}{2} + \frac{\epsilon}{2})}
-  &\le \EulerE^{-m D_{KL}(\frac{1}{2} + \frac{\epsilon}{2} \parallel \frac{1}{2}) }.
-\]
-The goal is to have both of these bounds less than $\alpha$, so it
-resolves to solving both inequalities for $m$.
-The first inequality becomes
-\[
-  m \ge \frac{\log(1/\alpha}{D_{KL}(\frac{1}{2} + \frac{\epsilon}{2}
+    m \ge \frac{\log(1/\alpha)}{D_{KL}(\frac{1}{2} + \frac{\epsilon}{2}
     \parallel \frac{1}{2})}.
-\]
-Likewise the second inequality also becomes
+\] Likewise the second inequality also becomes
 \[
-  m \ge \frac{\log(1/\alpha}{D_{KL}(\frac{1}{2} + \frac{\epsilon}{2}
+    m \ge \frac{\log(1/\alpha)}{D_{KL}(\frac{1}{2} + \frac{\epsilon}{2}
     \parallel \frac{1}{2})}.
-\]
-As shown above  ${D_{KL}(\frac{1}{2} + \frac{\epsilon}{2}
-    \parallel \frac{1}{2}) \le 2 \epsilon^{-2}$ so choosing $m$ at least
-$2 \log(1/\alpha) \epsilon^{-2}$ suffices.
+\] As shown above \( D_{KL}(\frac{1}{2} + \frac{\epsilon}{2} \parallel
+\frac{1}{2}) \le 2 \epsilon^{-2} \) so choosing \( m \) at least \( 2
+\log(1/\alpha) \epsilon^{-2} \) suffices.
 
-Note the difference in the bounds for $\epsilon$ fixed.  The lower
-bound grows like $(1-2\alpha)^2$ while the upper bound grows like
-$\log(1/\alpha)$, For the specific examples considered at the
-begining, $\alpha = 0.05$ and $\epsilon = 0.10$, the lower bound is 
+Note the difference in the bounds for \( \epsilon \) fixed.  The lower
+bound grows like \( (1-2\alpha)^2 \) while the upper bound grows like \(
+\log(1/\alpha) \), For the specific examples considered at the
+beginning, \( \alpha = 0.05 \) and \( \epsilon = 0.10 \), the lower
+bound is
 \[
-  (1 - 2\delta)^2 \epsilon^{-2} = (1- 2 \cdot 0.05)^2 \cdot
-  (0.10)^{-2} = 81
-  \]
-  and the upper bound is
-  \[
-    2 \log(1/\alpha) \epsilon^{-2} = 2 \log(1/0.05) (0.10)^{-2} \approx 599.15.
-  \]
-The algorithms described above fall well within this range, closer to
+    (1 - 2\delta)^2 \epsilon^{-2} = (1- 2 \cdot 0.05)^2 \cdot (0.10)^{-2}
+    = 81
+\] and the upper bound is
+\[
+    2 \log(1/\alpha) \epsilon^{-2} = 2 \log(1/0.05) (0.10)^{-2} \approx
+    599.15.
+\] The algorithms described above fall well within this range, closer to
 the lower bound.
 
-  
 \subsection*{Sources}
 
 The definition of biased coin is from Wikipedia.
@@ -876,16 +883,19 @@ The problem of how many tosses to find the biased coin appeared in the
 FiveThirtyEight.com weekly Riddler puzzle column on September 29, 2017.
 This first subsection with the majority solution is adapted from a white
 paper ``What's Past is \emph{Not} Prologue'' by James White, Jeff
-Rosenbluth, and Victor Haghani from Elm Partners Investing.  In turn,
-their example is motivated by a paper ``Good and bad properties of the
-Kelly criterion'' by McLean, Thorp and Ziemba.  The second subsection
-with the statistical solution is original.
+Rosenbluth, and Victor Haghani from Elm Partners Investing,
+\cite{white17}. In turn, their example is motivated by a paper ``Good
+and bad properties of the Kelly criterion'' by McLean, Thorp and
+Ziemba,
+\cite{mclean17}.  The second subsection with the statistical solution is
+original.
 
 The Bayesian analysis is adapted and extended from \\
-\link{https://laurentlessard.com/bookproofs/finding-the-doctored-coin}{Lessard,Finding the baised coin}.
+\link{https://laurentlessard.com/bookproofs/finding-the-doctored-coin}{Lessard,Finding
+the biased coin}.
 
-The necessary bounds for an arbitrary algorithm are adapted from
-lecture notes by Austin Eide.
+The necessary bounds for an arbitrary algorithm are adapted from lecture
+notes by Austin Eide.
 
 \nocite{white17}
 \nocite{maclean10}
@@ -897,42 +907,76 @@ lecture notes by Austin Eide.
 
 \subsection*{Algorithm}
 
-%% \input{twocoins_algorithms}
+\input{twocoins_algorithms}
+
 \subsection*{Scripts}
 
-\input{twocoins_scripts}
-
-\hr
+\input{twocoins_scripts} \hr
 
 \visual{Problems to Work}{../../../../CommonInformation/Lessons/solveproblems.png}
 \section*{Problems to Work for Understanding}
-\begin{enumerate}
-    \item
-        You have two coins.  One is fair with \( \Prob{H} = \frac{1}{2} \).
-        The other coin is biased with \( \Prob{H} = p > \frac{1}{2} \).
-        First you toss one of the coins once, resulting in heads.  Then
-        you toss the other coin three times, resulting in two heads.
-        What is the least value of \( p \) that will allow you to decide
-        which is the biased coin based on this information?
+\renewcommand{\theexerciseseries}{}
+\renewcommand{\theexercise}{\arabic{exercise}}
 
-
-        %%  Interestingly, the probability of two heads in three tosses from a
-        %%  fair coin and  one head in one toss from a biased coin with $p >
-        %%  1/2$ is always greater, for any $p$, than
-        %%  the probability of two heads in three tosses from a
-        %%  biased coin and  one head in one toss from a fair coin
-
-    \item
-        Show that the log-likelihood expression with the binomial
-        probabilities simplifies to
-        \[
-            \abs{k_L - k_R} \cdot \abs{ \log\left( \frac{1}{p_1} - 1
-            \right) - \log\left( \frac{1}{p_2} - 1 \right) } > \log
-            \left( \frac{1}{\alpha} - 1 \right).
-        \]
-\end{enumerate}
-
-%% \link{ _soln.xml}{Solutions to Problems}
+\begin{exercise}
+    You have two coins.  One is fair with \( \Prob{H} = \frac{1}{2} \).
+    The other coin is biased with \( \Prob{H} = p > \frac{1}{2} \).
+    First you toss one of the coins once, resulting in heads.  Then you
+    toss the other coin three times, resulting in two heads. What is the
+    least value of \( p \) that will allow you to decide which is the
+    biased coin based on this information?
+\end{exercise}
+\begin{solution}
+    Interestingly, the probability of two heads in three tosses from a
+    fair coin and one head in one toss from a biased coin with \( p >
+    1/2 \), specifically \( \frac{3p}{8} \), is always greater, for any \(
+    p \), than the probability of two heads in three tosses from a
+    biased coin and one head in one toss from a fair coin, specifically \(
+    \frac{3}{2}p^2(1-p) \).
+\end{solution}
+\begin{exercise}
+    Show that the log-likelihood expression with the binomial
+    probabilities simplifies to
+    \[
+        \abs{k_L - k_R} \cdot \abs{ \log\left( \frac{1}{p_1} - 1 \right)
+        - \log\left( \frac{1}{p_2} - 1 \right) } > \log \left( \frac{1}{\alpha}
+        - 1 \right).
+    \]
+\end{exercise}
+\begin{solution}
+    Start with
+    \[
+        \frac{Q(k \given \theta_L)}{Q(k \given \theta_R)} = \left(\frac{p_1}
+        {p_2} \right)^{k_L - k_R} \cdot \left(\frac{1-p_2}{1-p_1} \right)^
+        {k_L - k_R}.
+    \] Note that the binomial coefficients are the same in numerator and
+    denominator so they cancel. Take logarithms of both sides, use laws
+    of exponents
+    \[
+        \log(Q(k \given \theta_L)) - \log(Q(k \given \theta_R)) = (k_L -
+        k_R) \log \left( \left(\frac{p_1}{p_2} \right) + (k_L - k_R)
+        \log \left(\frac{1-p_2}{1-p_1} \right) \right).
+    \] Factor and rearrange
+    \[
+        \log(Q(k \given \theta_L)) - \log(Q(k \given \theta_R)) = (k_L -
+        k_R) \left( \log(p_1) - \log(p_2) + \log(1-p_2) - \log(1-p_1)
+        \right).
+    \] Rearrange again
+    \begin{align*}
+        \log(Q(k \given \theta_L)) - \log(Q(k \given \theta_R)) &= (k_L
+        - k_R) \left( \log \left( \frac{p_1}{1-p1} \right) - \log \left(\frac
+        {p_{2}}{1-p_2}\right) \right) \\
+        & = (k_L - k_R) \left( \log \left( -\frac{1-p1}{p_1} \right) +
+        \log \left(\frac{1-p_2}{p_{2}}\right) \right) \\
+    \end{align*}
+    Expanding the fractions and taking absolute values gives the desired
+    right hand side
+    \[
+        \abs{k_L - k_R} \cdot \abs{ \log\left( \frac{1}{p_1} - 1 \right)
+        - \log\left( \frac{1}{p_2} - 1 \right) } > \log \left( \frac{1}{\alpha}
+        - 1 \right).
+    \]
+\end{solution}
 
 \hr
 
@@ -958,6 +1002,9 @@ lecture notes by Austin Eide.
     \item
 \end{enumerate}
 
+\section*{\solutionsname}
+\loadSolutions
+
 \hr
 
 \mydisclaim \myfooter
@@ -966,7 +1013,22 @@ Last modified:  \flastmod
 
 \end{document}
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% End:
+File name                  : twocoins.tex
+Number of characters       : 42662
+Number of words            : 5260
+Percent of complex words   : 18.23
+Average syllables per word : 1.7202
+Number of sentences        : 278
+Average words per sentence : 18.9209
+Number of text lines       : 825
+Number of blank lines      : 196
+Number of paragraphs       : 185
+
+
+READABILITY INDICES
+
+Fog                        : 14.8611
+Flesch                     : 42.1055
+Flesch-Kincaid             : 12.0869
+
+
